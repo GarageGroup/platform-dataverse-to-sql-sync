@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>GarageGroup.Platform.DataMover.InternalApi.DbData.InOut</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PrimeFuncPack.Core.FlatArray" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

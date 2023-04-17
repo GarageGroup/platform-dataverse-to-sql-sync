@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>GarageGroup.Platform.DataMover.Data.Move.Console</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="db-migrations.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="migrations\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="..\..\data-sync\AzureFunc\configuration.yaml" DestinationFolder="$(OutDir)" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Move\InOut.Move.csproj" />
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Sync\InOut.Sync.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\Func\Func.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\DbData.Api\Api\Api.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\DbData.Api\InOut\InOut.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\Func\Func.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\InOut\InOut.csproj" />
+    <ProjectReference Include="..\Handler\Handler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GGroupp.Infra.Dataverse.Api" Version="3.9.0" />
+    <PackageReference Include="GGroupp.Infra.Handler.Console" Version="0.0.1" />
+    <PackageReference Include="GGroupp.Infra.Handler.Union" Version="0.0.1" />
+    <PackageReference Include="GGroupp.Infra.Http.Polly" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.Sql.Api" Version="1.3.0" />
+    <PackageReference Include="GGroupp.Infra.Sql.Api.Provider.Microsoft" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.Sql.Migration.Handler" Version="0.2.1" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Pipeline" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>GarageGroup.Platform.DataMover.Data.Sync.Handler</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Sync\InOut.Sync.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.2.0" />
+    <PackageReference Include="GGroupp.Infra.Handler.Core" Version="0.0.1" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>
