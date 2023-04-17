@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>GarageGroup.Platform.DataMover.InternalApi.CrmEntityFlow.Get.Func</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InOut\InOut.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GGroupp.Core.Collections.FlatArray.Extensions" Version="1.8.0" />
+    <PackageReference Include="GGroupp.Infra.Dataverse.Api.Abstractions.EntitySetGet" Version="3.6.0" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>

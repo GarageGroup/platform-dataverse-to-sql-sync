@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>GarageGroup.Platform.DataMover.DataMoverApi.Api</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InOut.Move\InOut.Move.csproj" />
+    <ProjectReference Include="..\InOut.Sync\InOut.Sync.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\DbData.Api\InOut\InOut.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\InOut\InOut.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\InOut\InOut.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.2.0" />
+    <PackageReference Include="GGroupp.Core.Collections.FlatArray.Extensions" Version="1.8.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+    <PackageReference Include="PrimeFuncPack.Dependency" Version="2.0.2" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>
