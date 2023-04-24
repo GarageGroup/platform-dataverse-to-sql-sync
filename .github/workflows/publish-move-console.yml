@@ -1,0 +1,66 @@
+name: Publish Move Console App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Add Garage Group NuGet Source
+      run: >
+        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+        -n ggroupp
+        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        --store-password-in-clear-text
+
+    - name: Test platfrom dataverse to sql sync
+      run: dotnet test
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Add Garage Group NuGet Source
+      run: >
+        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+        -n ggroupp
+        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        --store-password-in-clear-text
+
+    - name: Restore console app
+      run: dotnet restore ./src/app/data-move/Console/Console.csproj
+
+    - name: Build console app
+      run: dotnet build ./src/app/data-move/Console/Console.csproj --no-restore  -c Release
+
+    - name: Publish console app
+      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./publish
+
+    - name: Get version
+      id: get_version
+      run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+
+    - name: Archive publish folder
+      run: zip -r publish.zip ./publish
+
+    - name: Upload build output
+      uses: actions/upload-artifact@v3
+      with:
+        name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version }}'
+        path: publish.zip
