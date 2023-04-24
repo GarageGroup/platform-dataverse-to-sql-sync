@@ -5,17 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataMover.Data.Move.Console</AssemblyName>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="db-migrations.yaml" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="migrations\**" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="..\..\data-sync\AzureFunc\configuration.yaml" DestinationFolder="$(OutDir)" />
-  </Target>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Move\InOut.Move.csproj" />
