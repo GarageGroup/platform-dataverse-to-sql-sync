@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="host.json" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="configuration.yaml" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="local.settings.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Sync\InOut.Sync.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Move\InOut.Move.csproj" />
