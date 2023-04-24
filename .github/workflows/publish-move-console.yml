@@ -64,8 +64,3 @@ jobs:
       with:
         name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version }}'
         path: publish.zip
-
-    - name: Remove artifact
-      uses: geekyeggo/delete-artifact@v2
-      with:
-        name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version }}'
