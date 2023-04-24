@@ -1,0 +1,128 @@
+name: Publish Data Sync Azure Func
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Add Garage Group NuGet Source
+      run: >
+        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+        -n ggroupp
+        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        --store-password-in-clear-text
+
+    - name: Test platfrom dataverse to sql sync
+      run: dotnet test
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Add Garage Group NuGet Source
+      run: >
+        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+        -n ggroupp
+        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        --store-password-in-clear-text
+
+    - name: Restore sync func
+      run: dotnet restore ./src/app/data-sync/AzureFunc/AzureFunc.csproj
+
+    - name: Build sync func
+      run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
+
+    - name: Publish sync func
+      run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./publish
+
+    - name: Get version
+      id: get_version
+      run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+
+    - name: Archive publish folder
+      run: zip -r publish.zip ./publish
+
+    - name: Upload build output
+      uses: actions/upload-artifact@v3
+      with:
+        name: 'ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}'
+        path: publish.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: publish
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get version
+      id: get_version
+      run: echo "version_number=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+
+    - name: Get current date time
+      id: date
+      run: echo "datetime=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+
+    - name: Download build output
+      uses: actions/download-artifact@v2
+      with:
+        name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version_number }}'
+
+    - name: Extract build output
+      run: unzip publish.zip -d .
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.APP_NAME }}
+        publish-profile: ${{ secrets.BOTFUNC_PUBLISHPROFILE }}
+        package: './publish'
+
+    - name: Update Azure Function App Configuration
+      run: |
+        az functionapp config appsettings set --name ${{ secrets.FUNC_NAME }} \
+          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --settings  "MaxTimeout"={{secrets.MAX_TIMEOUT}} \
+                      "Rules:Entities"={{secrets.RULES_ENTITIES}} \
+                      "Rules:ConfigPath"={{secrets.RULES_CONFIG_PATH}} \
+                      "Dataverse:ServiceUrl"={{secrets.DATAVERSE_SERVICE_URL}} \
+                      "Dataverse:AuthTenantId"={{secrets.DATAVERSE_AUTH_TENANT_ID}} \
+                      "Dataverse:AuthClientId"={{secrets.DATAVERSE_AUTH_CLIENT_ID}} \
+                      "Dataverse:AuthClientSecret"={{secrets.DATAVERSE_AUTH_CLIENT_SECRET}} \
+                      "ConnectionStrings:SqlDb"={{secrets.SQL_DB_CONNECTION_STRING}} \
+                      "DbRetryPolicy:NumberOfTries"={{secrets.DB_RETRY_POLICY_NUMBER_OF_TRIES}} \
+                      "DbRetryPolicy:DeltaTime"={{secrets.DB_RETRY_POLICY_DELTA_TIME}} \
+                      "DbRetryPolicy:MinTimeInterval"={{secrets.DB_RETRY_POLICY_MIN_TIME_INTERVAL}} \
+                      "DbRetryPolicy:MaxTimeInterval"={{secrets.DB_RETRY_POLICY_MAX_TIME_INTERVAL}} \
+                      "DbRetryPolicy:TransientErrors"={{secrets.DB_RETRY_POLICY_TRANSIENT_ERRORS}} \
+
+    - name: Log out of Azure
+      run: az logout
+
+    - name: Remove artifact
+      uses: geekyeggo/delete-artifact@v2
+      with:
+        name: 'ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}'
