@@ -50,18 +50,23 @@ jobs:
       run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
 
     - name: Publish sync func
-      run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./publish
+      run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./build
 
     - name: Get version
       id: get_version
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
     - name: Archive publish folder
-      run: zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./publish
+      run: zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./build
 
-    - name: Upload build output to Azure Blob Storage
-      uses: bacongobbler/azure-blob-storage-upload@v3.0.0
+    - uses: azure/login@v1
       with:
-        source_dir: ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip
-        container_name: startifactblob
-        connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Upload zip to Azure Blob Storage
+      id: upload
+      uses: github-developer/upload-azure-blob@main
+      with:
+        account: startifactblob
+        destination: artifacts
+        source: ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip
