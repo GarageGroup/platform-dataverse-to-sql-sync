@@ -57,10 +57,12 @@ jobs:
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
     - name: Archive publish folder
-      run: zip -r publish.zip ./publish
+      run: zip -r ggroupp-platform-dataverse-to-sql-console-${{ env.version }}.zip ./publish
 
-    - name: Upload build output
-      uses: actions/upload-artifact@v3
-      with:
-        name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version }}'
-        path: publish.zip
+    - name: Upload build output to Azure Blob Storage
+      - uses: actions/checkout@v3
+      - uses: bacongobbler/azure-blob-storage-upload@v3
+        with:
+          source_dir: ggroupp-platform-dataverse-to-sql-console-${{ env.version }}.zip
+          container_name: startifactblob
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
