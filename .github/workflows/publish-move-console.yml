@@ -65,7 +65,7 @@ jobs:
 
     - name: Upload zip to Azure Blob Storage
       id: upload
-      uses: github-developer/upload-azure-blob@v1
+      uses: github-developer/upload-azure-blob@main
       with:
         account: startifactblob
         destination: artifacts
