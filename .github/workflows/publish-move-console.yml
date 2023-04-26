@@ -49,18 +49,24 @@ jobs:
     - name: Build console app
       run: dotnet build ./src/app/data-move/Console/Console.csproj --no-restore  -c Release
 
-    - name: Publish console app
-      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./publish
-
     - name: Get version
       id: get_version
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
-    - name: Archive publish folder
-      run: zip -r publish.zip ./publish
+    - name: Publish console app
+      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./build
 
-    - name: Upload build output
-      uses: actions/upload-artifact@v3
+    - name: Archive publish folder
+      run: zip -r ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./build
+
+    - uses: azure/login@v1
       with:
-        name: 'ggroupp-platform-dataverse-to-sql-console-${{ env.version }}'
-        path: publish.zip
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Upload zip to Azure Blob Storage
+      id: upload
+      uses: github-developer/upload-azure-blob@main
+      with:
+        account: startifactblob
+        destination: artifacts
+        source: ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip
