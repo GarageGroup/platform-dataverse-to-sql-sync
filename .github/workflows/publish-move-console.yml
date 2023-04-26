@@ -57,7 +57,7 @@ jobs:
       run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./build
 
     - name: Archive publish folder
-      run: zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./publish
+      run: zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./build
 
     - uses: azure/login@v1
       with:
