@@ -50,18 +50,15 @@ jobs:
       run: dotnet build ./src/app/data-move/Console/Console.csproj --no-restore  -c Release
 
     - name: Publish console app
-      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./publish
+      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./ggroupp-platform-dataverse-to-sql-console-${{ env.version }}
 
     - name: Get version
       id: get_version
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
-    - name: Archive publish folder
-      run: zip -r ggroupp-platform-dataverse-to-sql-console-${{ env.version }}.zip ./publish
-
     - name: Upload build output to Azure Blob Storage
       uses: bacongobbler/azure-blob-storage-upload@v3.0.0
       with:
-        source_dir: ggroupp-platform-dataverse-to-sql-console-${{ env.version }}.zip
+        source_dir: ./ggroupp-platform-dataverse-to-sql-console-${{ env.version }}
         container_name: startifactblob
         connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
