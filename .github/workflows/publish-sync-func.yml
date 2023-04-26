@@ -60,7 +60,7 @@ jobs:
       run: zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./publish
 
     - name: Upload build output to Azure Blob Storage
-      uses: bacongobbler/azure-blob-storage-upload@v3
+      uses: bacongobbler/azure-blob-storage-upload@v3.0.0
       with:
         source_dir: ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip
         container_name: startifactblob
