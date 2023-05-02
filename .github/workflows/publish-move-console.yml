@@ -63,10 +63,15 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Upload zip to Azure Blob Storage
-      id: upload
-      uses: github-developer/upload-azure-blob@main
+    - name: Upload to Azure Blob Storage
+      uses: azure/CLI@v1
       with:
-        account: startifactblob
-        destination: artifacts
-        source: ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip
+        azcliversion: 2.30.0
+        inlineScript: |
+          az storage blob upload \
+            --container-name artifacts \
+            --file ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+            --account-name startifactblob \
+            --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
+      env:
+        AZURE_STORAGE_ACCOUNT: startifactblob
