@@ -72,5 +72,6 @@ jobs:
             --container-name artifacts \
             --file ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
             --account-name startifactblob \
+            --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
       env:
         AZURE_STORAGE_ACCOUNT: startifactblob
