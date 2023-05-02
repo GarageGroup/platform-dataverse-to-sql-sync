@@ -70,7 +70,7 @@ jobs:
         inlineScript: |
           az storage blob upload \
             --container-name artifacts \
-            --file ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+            --file ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
             --account-name startifactblob \
             --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
       env:
