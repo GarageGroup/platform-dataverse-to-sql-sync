@@ -71,5 +71,4 @@ jobs:
           az storage blob upload \
             --container-name artifacts \
             --file ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
-            --destination-path dataverse-to-sql \
             --account-name startifactblob \
