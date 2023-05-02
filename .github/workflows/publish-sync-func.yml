@@ -68,7 +68,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az storage blob upload-batch \
+          az storage blob upload \
             --destination artifacts \
             --source ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
             --destination-path dataverse-to-sql \
