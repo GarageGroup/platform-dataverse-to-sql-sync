@@ -59,7 +59,7 @@ jobs:
     - name: Archive publish folder
       run: |
         cd ./build
-        zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./build
+        zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
 
     - uses: azure/login@v1
       with:
