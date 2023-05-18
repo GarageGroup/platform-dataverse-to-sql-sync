@@ -57,7 +57,7 @@ jobs:
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
     - name: Archive publish folder
-      run: >
+      run: |
         cd ./build
         zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./build
 
