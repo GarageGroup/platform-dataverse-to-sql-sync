@@ -54,10 +54,10 @@ jobs:
       run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
     - name: Publish console app
-      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./build
+      run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./
 
     - name: Archive publish folder
-      run: zip -r ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./build
+      run: zip -r ggroupp-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./
 
     - uses: azure/login@v1
       with:
