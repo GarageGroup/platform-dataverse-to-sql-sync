@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Moq;
 using Xunit;
 
@@ -16,7 +16,7 @@ partial class CrmEntityFlowGetFuncTest
 
         var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
         var cancellationToken = new CancellationToken(canceled: true);
-        
+
         await Assert.ThrowsAsync<ArgumentNullException>(async () => await IterateOverAsyncEnumerableAsync(func, null!, cancellationToken));
     }
 
@@ -33,7 +33,7 @@ partial class CrmEntityFlowGetFuncTest
 
         var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
         var cancellationToken = new CancellationToken(canceled: true);
-        
+
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken));
     }
 
@@ -44,7 +44,7 @@ partial class CrmEntityFlowGetFuncTest
 
         var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
         var cancellationToken = new CancellationToken(canceled: true);
-        
+
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken));
     }
 
@@ -57,7 +57,7 @@ partial class CrmEntityFlowGetFuncTest
 
         var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
         var cancellationToken = new CancellationToken(canceled: false);
-        
+
         var actual = await IterateOverAsyncEnumerableAsync(func, input, cancellationToken);
 
         Assert.True(CompareCrmEntitySets(expected, actual));
@@ -71,10 +71,10 @@ partial class CrmEntityFlowGetFuncTest
         var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(dataverseEntitySetGetOutSet);
         var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
         var cancellationToken = new CancellationToken(canceled: false);
-        
+
         var _ = await IterateOverAsyncEnumerableAsync(func, input, cancellationToken);
 
-        foreach(var dataverseEntitySetGetIn in dataverseEntitySetGetInSet)
+        foreach (var dataverseEntitySetGetIn in dataverseEntitySetGetInSet)
         {
             mockDataverseEntitySetGetSupplier.Verify(func => func.GetEntitySetAsync<CrmEntityJson>(dataverseEntitySetGetIn, cancellationToken), Times.Once);
         }

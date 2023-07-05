@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 
 partial class DataMoveHandler
 {
-    public ValueTask<Result<Unit, HandlerFailure>> HandleAsync(Unit input, CancellationToken cancellationToken)
+    public ValueTask<Result<Unit, Failure<HandlerFailureCode>>> HandleAsync(Unit input, CancellationToken cancellationToken)
         =>
         AsyncPipeline.Pipe(
             input, cancellationToken)
@@ -15,5 +15,5 @@ partial class DataMoveHandler
         .PipeValue(
             dataMoverApi.MoveAsync)
         .Pipe(
-            static success => Result.Success(success).With<HandlerFailure>());
+            static success => Result.Success(success).With<Failure<HandlerFailureCode>>());
 }

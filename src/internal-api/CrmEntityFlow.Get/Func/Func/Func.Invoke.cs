@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp;
-using GGroupp.Infra;
+using GarageGroup;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 
@@ -52,7 +52,7 @@ partial class CrmEntityFlowGetFunc
             CreateCrmEntity(input.EntityName, entityJson);
 
         static DataverseExpandedField ToExpandedField(IGrouping<string, CrmEntityLookup> lookupGroup)
-            => 
+            =>
             new(lookupGroup.Key, lookupGroup.Select(GetLookupFieldName).Distinct().ToFlatArray());
 
         static string GetRootFieldName(CrmEntityLookup lookup)
@@ -67,7 +67,7 @@ partial class CrmEntityFlowGetFunc
     private async ValueTask<DataverseEntitySetGetOut<CrmEntityJson>> GetEntitiesAsync(
         DataverseEntitySetGetIn input, CancellationToken cancellationToken)
     {
-        while(true)
+        while (true)
         {
             try
             {

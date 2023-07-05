@@ -1,7 +1,8 @@
-using GGroupp.Infra;
+using System;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 
-public interface IDataSyncHandler : IHandler<EventDataJson>
+public interface IDataSyncHandler : IHandler<EventDataJson, Unit>
 {
 }

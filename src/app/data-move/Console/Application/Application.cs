@@ -1,4 +1,4 @@
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using PrimeFuncPack;
 
 namespace GarageGroup.Platform.DataMover;

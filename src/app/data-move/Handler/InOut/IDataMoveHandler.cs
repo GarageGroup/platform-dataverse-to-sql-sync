@@ -1,8 +1,8 @@
 using System;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 
-public interface IDataMoveHandler : IHandler<Unit>
+public interface IDataMoveHandler : IHandler<Unit, Unit>
 {
 }

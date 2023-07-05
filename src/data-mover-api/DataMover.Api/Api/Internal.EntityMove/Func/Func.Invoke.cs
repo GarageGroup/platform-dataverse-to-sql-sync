@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp;
+using GarageGroup;
 using Microsoft.Extensions.Logging;
 
 namespace GarageGroup.Platform.DataMover;
@@ -26,7 +26,7 @@ partial class EntityMoveFunc
         {
             return default;
         }
-        
+
         foreach (var table in result.TableNames)
         {
             var dbDeleteIn = new DbDataDeleteIn(table, syncTime, input.CrmEntityId);
