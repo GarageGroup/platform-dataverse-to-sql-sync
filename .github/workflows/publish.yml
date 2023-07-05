@@ -1,7 +1,10 @@
-name: Publish Move Console App
+name: Publish Data Sync Azure Func And Console App
 
 on:
-  workflow_dispatch:
+  page_build:
+  release:
+    types:
+    - created
 
 jobs:
   test:
@@ -43,27 +46,42 @@ jobs:
           -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
           --store-password-in-clear-text
 
+      - name: Restore sync func
+        run: dotnet restore ./src/app/data-sync/AzureFunc/AzureFunc.csproj
+
+      - name: Build sync func
+        run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
+
+      - name: Publish sync func
+        run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./buildFunc
+
       - name: Restore console app
         run: dotnet restore ./src/app/data-move/Console/Console.csproj
 
       - name: Build console app
         run: dotnet build ./src/app/data-move/Console/Console.csproj --no-restore  -c Release
 
+      - name: Publish console app
+        run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./buildConsole
+
       - name: Get version
         id: get_version
         run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
-      - name: Publish console app
-        run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./build
-
-      - name: Archive publish folder
+      - name: Archive sync func publish folder
         run: |
-          cd ./build
+          cd ./buildFunc
+          zip -r garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
+
+      - name: Archive console app publish folder
+        run: |
+          cd ./buildConsole
           zip -r garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./
+
 
       - uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS_ARTIFACT }}
 
       - name: Upload to Azure Blob Storage
         uses: azure/CLI@v1
@@ -72,8 +90,14 @@ jobs:
           inlineScript: |
             az storage blob upload \
               --container-name artifacts \
-              --file ./build/garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
               --account-name startifactblob \
-              --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
+              --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} &&
+
+            az storage blob upload \
+              --container-name artifacts \
+              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+              --account-name startifactblob \
+              --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
           AZURE_STORAGE_ACCOUNT: startifactblob
