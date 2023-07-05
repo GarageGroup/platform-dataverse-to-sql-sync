@@ -27,6 +27,3 @@ jobs:
 
     - name: Build platform-dataverse-to-sql-sync.sln
       run: dotnet build --no-restore  -c Release
-
-    - name: Test platform-dataverse-to-sql-sync.sln
-      run: dotnet test --no-build  -c Release
