@@ -53,7 +53,7 @@ jobs:
         run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
 
       - name: Publish sync func
-        run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./build
+        run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./buildFunc
 
       - name: Restore console app
         run: dotnet restore ./src/app/data-move/Console/Console.csproj
@@ -62,7 +62,7 @@ jobs:
         run: dotnet build ./src/app/data-move/Console/Console.csproj --no-restore  -c Release
 
       - name: Publish console app
-        run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./build
+        run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./buildConsole
 
       - name: Get version
         id: get_version
@@ -70,12 +70,12 @@ jobs:
 
       - name: Archive sync func publish folder
         run: |
-          cd ./build
+          cd ./buildFunc
           zip -r garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
 
       - name: Archive console app publish folder
         run: |
-          cd ./build
+          cd ./buildConsole
           zip -r garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./
 
 
