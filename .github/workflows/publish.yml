@@ -90,13 +90,13 @@ jobs:
           inlineScript: |
             az storage blob upload \
               --container-name artifacts \
-              --file ./build/garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
+              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} &&
 
             az storage blob upload \
               --container-name artifacts \
-              --file ./build/garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
