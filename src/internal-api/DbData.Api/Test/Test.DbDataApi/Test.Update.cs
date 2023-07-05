@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Moq;
 using Xunit;
 
@@ -82,7 +82,7 @@ partial class DbDataApiTest
             items: new(
                 new DbDataItem(
                     crmId: Guid.Parse("9c6c896b-506b-4bab-ba4b-546ded8d4b81"),
-                    fieldValues: new(new DbDataFieldValue("field1", string.Empty)))), 
+                    fieldValues: new(new DbDataFieldValue("field1", string.Empty)))),
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: false);
 
@@ -104,7 +104,7 @@ partial class DbDataApiTest
         var input = new DbDataUpdateIn(
             tableName: "table1",
             keyFieldName: "id",
-            items: default, 
+            items: default,
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: false);
 

@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp;
-using GGroupp.Infra;
+using GarageGroup;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 

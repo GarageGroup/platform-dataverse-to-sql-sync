@@ -1,13 +1,12 @@
 using System;
 using System.Net;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PrimeFuncPack;
 
 namespace GarageGroup.Platform.DataMover;
 
-[HandlerFunctionProvider]
 internal static class Application
 {
     [EventGridFunction("OnRecordModified")]

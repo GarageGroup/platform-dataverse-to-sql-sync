@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 
 partial class DataSyncHandler
 {
-    public ValueTask<Result<Unit, HandlerFailure>> HandleAsync(
+    public ValueTask<Result<Unit, Failure<HandlerFailureCode>>> HandleAsync(
         EventDataJson? handlerData, CancellationToken cancellationToken)
         =>
         AsyncPipeline.Pipe(
@@ -21,7 +21,7 @@ partial class DataSyncHandler
         .PipeValue(
             dataMoverApi.SynchronizeAsync)
         .Pipe(
-            static @out => Result.Success(@out).With<HandlerFailure>());
+            static @out => Result.Success(@out).With<Failure<HandlerFailureCode>>());
 
     private static DataSyncEventType ParseEventType(string? eventType)
     {

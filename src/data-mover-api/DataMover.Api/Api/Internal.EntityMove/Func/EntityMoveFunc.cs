@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using GGroupp;
+using GarageGroup;
 using Microsoft.Extensions.Logging;
 
 namespace GarageGroup.Platform.DataMover;
@@ -87,7 +87,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
             {
                 return GetValue(ruleField, fieldValue);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new InvalidOperationException($"Failed to get value from {ruleField.CrmField}", ex);
             }
@@ -96,7 +96,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
         bool IsDataverseValueActual(CrmEntityFieldValue fieldValue)
             =>
             string.Equals(fieldValue.Name, ruleField.CrmField.Name, StringComparison.InvariantCulture);
-        
+
         static object? GetNull()
             =>
             null;
@@ -105,12 +105,12 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
     private static object? GetValue(RuleField ruleField, CrmEntityFieldValue fieldValue)
     {
         var value = fieldValue.JsonValue;
-        
+
         if (value.ValueKind is JsonValueKind.Null or JsonValueKind.Undefined)
         {
             return null;
         }
-        
+
         if (string.IsNullOrEmpty(ruleField.CrmField.LookupName) is false)
         {
             if (fieldValue.JsonValue.TryGetProperty(ruleField.CrmField.LookupName, out value) is false)
@@ -139,7 +139,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
         }
 
         return GetMatchedValue(dbValue?.ToString()).Or(GetDefaultOrAbsent).Or(SkipOrAbsent).OrThrow(UnableToFindException);
-        
+
         InvalidOperationException UnableToFindException()
             =>
             new($"Unable to find value '{dbValue}' with passed key for property {ruleField.CrmField.Name}");
@@ -150,7 +150,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
 
         Optional<string?> SkipOrAbsent()
             =>
-            ruleField.SkipNullable ?  Optional.Present<string?>(null) : default;
+            ruleField.SkipNullable ? Optional.Present<string?>(null) : default;
 
         Optional<string?> GetMatchedValue(string? key)
         {

@@ -8,72 +8,72 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '7.0.x'
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
 
-    - name: Add Garage Group NuGet Source
-      run: >
-        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
-        -n ggroupp
-        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
-        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
-        --store-password-in-clear-text
+      - name: Add Garage Group NuGet Source
+        run: >
+          dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+          -n garage
+          -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+          -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+          --store-password-in-clear-text
 
-    - name: Test platfrom dataverse to sql sync
-      run: dotnet test
+      - name: Test platfrom dataverse to sql sync
+        run: dotnet test
 
   publish:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '7.0.x'
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
 
-    - name: Add Garage Group NuGet Source
-      run: >
-        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
-        -n ggroupp
-        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
-        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
-        --store-password-in-clear-text
+      - name: Add Garage Group NuGet Source
+        run: >
+          dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+          -n garage
+          -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
+          -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+          --store-password-in-clear-text
 
-    - name: Restore sync func
-      run: dotnet restore ./src/app/data-sync/AzureFunc/AzureFunc.csproj
+      - name: Restore sync func
+        run: dotnet restore ./src/app/data-sync/AzureFunc/AzureFunc.csproj
 
-    - name: Build sync func
-      run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
+      - name: Build sync func
+        run: dotnet build ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-restore  -c Release
 
-    - name: Publish sync func
-      run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./build
+      - name: Publish sync func
+        run: dotnet publish ./src/app/data-sync/AzureFunc/AzureFunc.csproj --no-build  -c Release --output ./build
 
-    - name: Get version
-      id: get_version
-      run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+      - name: Get version
+        id: get_version
+        run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
 
-    - name: Archive publish folder
-      run: |
-        cd ./build
-        zip -r ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
+      - name: Archive publish folder
+        run: |
+          cd ./build
+          zip -r garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
 
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Upload to Azure Blob Storage
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.30.0
-        inlineScript: |
-          az storage blob upload \
-            --container-name artifacts \
-            --file ./build/ggroupp-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
-            --account-name startifactblob \
-            --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
-      env:
-        AZURE_STORAGE_ACCOUNT: startifactblob
+      - name: Upload to Azure Blob Storage
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az storage blob upload \
+              --container-name artifacts \
+              --file ./build/garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
+              --account-name startifactblob \
+              --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} \
+        env:
+          AZURE_STORAGE_ACCOUNT: startifactblob

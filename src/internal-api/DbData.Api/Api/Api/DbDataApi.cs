@@ -1,4 +1,4 @@
-using GGroupp.Infra;
+using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
 

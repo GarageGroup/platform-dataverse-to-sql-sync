@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Moq;
 
 namespace GarageGroup.Platform.DataMover.Test;
@@ -20,7 +20,7 @@ public static partial class CrmEntityFlowGetFuncTest
                     ExtensionData = new Dictionary<string, JsonElement>
                     {
                         {
-                            
+
                             "sl_pictureid",
                             CrmEntityFlowGetFuncSource.GetJsonElement("67f9f94d-5327-43a3-85ad-22fa6fcb2e7b")
                         }

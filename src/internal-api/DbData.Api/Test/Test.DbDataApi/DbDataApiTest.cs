@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Moq;
 
 namespace GarageGroup.Platform.DataMover.Test;
@@ -38,7 +38,7 @@ public static partial class DbDataApiTest
         _ = mock
             .Setup(static supplier => supplier.ExecuteNonQueryAsync(It.IsAny<IDbQuery>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(affectedRows);
-        
+
         return mock;
     }
 
