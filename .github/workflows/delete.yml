@@ -1,4 +1,4 @@
-name: Delete AzureFunc Artifact
+name: Delete AzureFunc And Console Artifacts
 
 on:
   release:
