@@ -4,8 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GarageGroup.Platform.DataMover.Data.Sync.Func</RootNamespace>
-    <AssemblyName>GarageGroup.Platform.DataMover.Data.Sync.Func</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataMover.Data.Sync.AzureFunc</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
