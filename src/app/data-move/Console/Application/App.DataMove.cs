@@ -14,7 +14,7 @@ partial class Application
         =>
         PrimaryHandler.UseStandardSocketsHttpHandler()
         .UseLogging("DataverseApiClient")
-        .UsePollyStandard(HttpStatusCode.TooManyRequests)
+        .UsePollyStandard()
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()
         .With(

@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 using GarageGroup.Infra;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,12 +8,16 @@ namespace GarageGroup.Platform.DataMover;
 
 internal static class Application
 {
-    [EventGridFunction("OnRecordModified")]
+    [ServiceBusFunction(
+        "OnRecordModified",
+        "%ServiceBus:TopicName%",
+        "%ServiceBus:SubscriptionName%",
+        "ServiceBus:ConnectionString")]
     internal static Dependency<IDataSyncHandler> UseDataSyncHandler()
         =>
         PrimaryHandler.UseStandardSocketsHttpHandler()
         .UseLogging("DataverseApiClient")
-        .UsePollyStandard(HttpStatusCode.TooManyRequests)
+        .UsePollyStandard()
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()
         .With(
