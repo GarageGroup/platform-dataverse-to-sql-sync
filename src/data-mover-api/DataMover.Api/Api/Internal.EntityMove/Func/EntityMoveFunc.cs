@@ -17,7 +17,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
 
     private const int DefaultDbBatchTimeoutMilliseconds = 7000;
 
-    private const int MaxSqlParametersCount = 2100;
+    private const int MaxSqlParametersCount = 2099;
 
     private readonly ICrmEntityFlowGetFunc flowGetFunc;
 
