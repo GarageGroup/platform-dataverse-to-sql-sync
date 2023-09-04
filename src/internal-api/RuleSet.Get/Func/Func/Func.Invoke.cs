@@ -84,7 +84,7 @@ partial class RuleSetGetFunc
                 entityKeyFieldName: entityKeyFieldName,
                 fields: tables.SelectMany(GetCrmFields).Distinct().ToFlatArray(),
                 filter: entity.Filter?.Trim(),
-                includeAnnotations: entity.Annotations?.Trim()),
+                includeAnnotations: CalculateAnnotations(entity)),
             tables: tables);
 
         RuleTable InnerMapTable(TableYaml table)
@@ -102,6 +102,40 @@ partial class RuleSetGetFunc
         static RuleCrmField GetCrmField(RuleField field)
             =>
             field.CrmField;
+    }
+
+    private static string? CalculateAnnotations(EntityYaml entity)
+    {
+        var annotations = entity.Annotations?.Trim();
+        if(string.IsNullOrEmpty(annotations) is false)
+        {
+            return annotations;
+        }
+
+        var annotationsArray = entity.Tables?
+            .SelectMany(
+                static table => table?.Fields?.SelectMany(ExtractAnnotation) ?? Enumerable.Empty<string>())
+            .Distinct()
+            .ToArray();
+        
+        return annotationsArray is { Length: > 0 } ? string.Join(",", annotationsArray) : null;
+
+        static IEnumerable<string> ExtractAnnotation(FieldYaml field)
+        {
+            const char annotationDelimiter = '@';
+            const int splitLength = 2;
+            const int annotationIndex = 1;
+
+            if(field.Crm?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedCrm && string.IsNullOrEmpty(splittedCrm[annotationIndex]) is false)
+            {
+                yield return splittedCrm[annotationIndex];
+            }
+
+            if(field.LookupName?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedLookupName && string.IsNullOrEmpty(splittedLookupName[annotationIndex]) is false)
+            {
+                yield return splittedLookupName[annotationIndex];
+            }
+        }
     }
 
     private static RuleTable MapTable(TableYaml table, string entityKeyFieldName)
