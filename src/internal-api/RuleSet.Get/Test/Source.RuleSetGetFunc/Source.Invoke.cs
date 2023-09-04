@@ -674,6 +674,357 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
                                             skipNullable: false))))))),
-            }
+            },
+            new object[]
+            {
+                new RuleSetGetOption("./configuration.yaml", new("*")),
+                new ConfigurationYaml
+                {
+                    Entities = new FlatArray<EntityYaml>(
+                        new EntityYaml
+                        {
+                            Name = "sl_area",
+                            Plural = "sl_areas",
+                            Tables = new FlatArray<TableYaml>(
+                                new TableYaml
+                                {
+                                    Name = "Area",
+                                    Fields = new FlatArray<FieldYaml>(
+                                        new FieldYaml
+                                        {
+                                            Type = "String",
+                                            LookupName = "sl_country@ForamtedValue \n\n ",
+                                            Sql = "Name \n\n",
+                                            Crm = "sl_name",
+                                            Map = new()
+                                            {
+                                                { "000211", "1" },
+                                                { "000212", "2" }
+                                            },
+                                            SkipNullable = true,
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "LowerString",
+                                            Sql = "LowerCaseName",
+                                            Crm = "sl_lowername@Entry.*",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Int32",
+                                            Sql = "CityCount",
+                                            Crm = "sl_citycount",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Decimal",
+                                            Sql = "CityCapitalization",
+                                            Crm = "sl_capitalization@ForamtedValue",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Boolean",
+                                            Sql = "IsCapital",
+                                            Crm = "sl_capitalbit@Entry.*",
+                                        }),
+                                    Operation = "Join",
+                                }),
+                        })
+                },
+                new RuleSetGetIn(null, false),
+                new RuleSetGetOut(new(
+                        new RuleEntity(
+                            crmData: new(
+                                entityName: "sl_area",
+                                entityPluralName: "sl_areas",
+                                entityKeyFieldName: "sl_areaid",
+                                fields: new(
+                                    new RuleCrmField("sl_name", "sl_country@ForamtedValue"),
+                                    new RuleCrmField("sl_lowername@Entry.*"),
+                                    new RuleCrmField("sl_citycount"),
+                                    new RuleCrmField("sl_capitalization@ForamtedValue"),
+                                    new RuleCrmField("sl_capitalbit@Entry.*")),
+                                filter: null,
+                                includeAnnotations: "ForamtedValue,Entry.*"
+                            ),
+                            tables: new(
+                                new RuleTable(
+                                    operation: RuleItemOperation.Join,
+                                    tableName: "Area",
+                                    keyFieldName: "CrmId",
+                                    fields: new(
+                                        new RuleField(
+                                            crmField: new("sl_name", "sl_country@ForamtedValue"),
+                                            sqlName: "Name",
+                                            type: RuleFieldType.String,
+                                            matcherRule: new(
+                                                new KeyValuePair<string, string?>("000211", "1"),
+                                                new KeyValuePair<string, string?>("000212", "2")),
+                                            skipNullable: true),
+                                        new RuleField(
+                                            crmField: new("sl_lowername@Entry.*"),
+                                            sqlName: "LowerCaseName",
+                                            type: RuleFieldType.LowerString,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_citycount"),
+                                            sqlName: "CityCount",
+                                            type: RuleFieldType.Int32,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalization@ForamtedValue"),
+                                            sqlName: "CityCapitalization",
+                                            type: RuleFieldType.Decimal,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalbit@Entry.*"),
+                                            sqlName: "IsCapital",
+                                            type: RuleFieldType.Boolean,
+                                            matcherRule: default,
+                                            skipNullable: false))))))),
+            },
+            new object[]
+            {
+                new RuleSetGetOption("./configuration.yaml", new("*")),
+                new ConfigurationYaml
+                {
+                    Entities = new FlatArray<EntityYaml>(
+                        new EntityYaml
+                        {
+                            Name = "sl_area",
+                            Plural = "sl_areas",
+                            Tables = new FlatArray<TableYaml>(
+                                new TableYaml
+                                {
+                                    Name = "Area",
+                                    Fields = new FlatArray<FieldYaml>(
+                                        new FieldYaml
+                                        {
+                                            Type = "String",
+                                            LookupName = "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty \n\n ",
+                                            Sql = "Name \n\n",
+                                            Crm = "sl_name",
+                                            Map = new()
+                                            {
+                                                { "000211", "1" },
+                                                { "000212", "2" }
+                                            },
+                                            SkipNullable = true,
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "LowerString",
+                                            Sql = "LowerCaseName",
+                                            Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Int32",
+                                            Sql = "CityCount",
+                                            Crm = "sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Decimal",
+                                            Sql = "CityCapitalization",
+                                            Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Boolean",
+                                            Sql = "IsCapital",
+                                            Crm = "sl_capitalbit",
+                                        }),
+                                    Operation = "Join",
+                                }),
+                        })
+                },
+                new RuleSetGetIn(null, false),
+                new RuleSetGetOut(new(
+                        new RuleEntity(
+                            crmData: new(
+                                entityName: "sl_area",
+                                entityPluralName: "sl_areas",
+                                entityKeyFieldName: "sl_areaid",
+                                fields: new(
+                                    new RuleCrmField("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                    new RuleCrmField("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                    new RuleCrmField("sl_capitalbit")),
+                                filter: null,
+                                includeAnnotations: "Microsoft.Dynamics.CRM.associatednavigationproperty,Microsoft.Dynamics.CRM.lookuplogicalname,OData.Community.Display.V1.FormattedValue"
+                            ),
+                            tables: new(
+                                new RuleTable(
+                                    operation: RuleItemOperation.Join,
+                                    tableName: "Area",
+                                    keyFieldName: "CrmId",
+                                    fields: new(
+                                        new RuleField(
+                                            crmField: new("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                            sqlName: "Name",
+                                            type: RuleFieldType.String,
+                                            matcherRule: new(
+                                                new KeyValuePair<string, string?>("000211", "1"),
+                                                new KeyValuePair<string, string?>("000212", "2")),
+                                            skipNullable: true),
+                                        new RuleField(
+                                            crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                            sqlName: "LowerCaseName",
+                                            type: RuleFieldType.LowerString,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                            sqlName: "CityCount",
+                                            type: RuleFieldType.Int32,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                            sqlName: "CityCapitalization",
+                                            type: RuleFieldType.Decimal,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalbit"),
+                                            sqlName: "IsCapital",
+                                            type: RuleFieldType.Boolean,
+                                            matcherRule: default,
+                                            skipNullable: false))))))),
+            },
+            new object[]
+            {
+                new RuleSetGetOption("./configuration.yaml", new("*")),
+                new ConfigurationYaml
+                {
+                    Entities = new FlatArray<EntityYaml>(
+                        new EntityYaml
+                        {
+                            Name = "sl_area",
+                            Plural = "sl_areas",
+                            Tables = new FlatArray<TableYaml>(
+                                new TableYaml
+                                {
+                                    Name = "Area",
+                                    Fields = new FlatArray<FieldYaml>(
+                                        new FieldYaml
+                                        {
+                                            Type = "LowerString",
+                                            Sql = "LowerCaseName",
+                                            Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                            LookupName = "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Decimal",
+                                            Sql = "CityCapitalization",
+                                            Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
+                                        }),
+                                    Operation = "Join",
+                                }),
+                        })
+                },
+                new RuleSetGetIn(null, false),
+                new RuleSetGetOut(new(
+                        new RuleEntity(
+                            crmData: new(
+                                entityName: "sl_area",
+                                entityPluralName: "sl_areas",
+                                entityKeyFieldName: "sl_areaid",
+                                fields: new(
+                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue")),
+                                filter: null,
+                                includeAnnotations: "Microsoft.Dynamics.CRM.lookuplogicalname,Microsoft.Dynamics.CRM.associatednavigationproperty,OData.Community.Display.V1.FormattedValue"
+                            ),
+                            tables: new(
+                                new RuleTable(
+                                    operation: RuleItemOperation.Join,
+                                    tableName: "Area",
+                                    keyFieldName: "CrmId",
+                                    fields: new(
+                                        new RuleField(
+                                            crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                            sqlName: "LowerCaseName",
+                                            type: RuleFieldType.LowerString,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                            sqlName: "CityCapitalization",
+                                            type: RuleFieldType.Decimal,
+                                            matcherRule: default,
+                                            skipNullable: false))))))),
+            },
+            new object[]
+            {
+                new RuleSetGetOption("./configuration.yaml", new("*")),
+                new ConfigurationYaml
+                {
+                    Entities = new FlatArray<EntityYaml>(
+                        new EntityYaml
+                        {
+                            Name = "sl_area",
+                            Plural = "sl_areas",
+                            Annotations = "PrimmaryAnnotationSholdBeChosen",
+                            Tables = new FlatArray<TableYaml>(
+                                new TableYaml
+                                {
+                                    Name = "Area",
+                                    Fields = new FlatArray<FieldYaml>(
+                                        new FieldYaml
+                                        {
+                                            Type = "LowerString",
+                                            Sql = "LowerCaseName",
+                                            Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                            LookupName = "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"
+                                        },
+                                        new FieldYaml
+                                        {
+                                            Type = "Decimal",
+                                            Sql = "CityCapitalization",
+                                            Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
+                                        }),
+                                    Operation = "Join",
+                                }),
+                        })
+                },
+                new RuleSetGetIn(null, false),
+                new RuleSetGetOut(new(
+                        new RuleEntity(
+                            crmData: new(
+                                entityName: "sl_area",
+                                entityPluralName: "sl_areas",
+                                entityKeyFieldName: "sl_areaid",
+                                fields: new(
+                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue")),
+                                filter: null,
+                                includeAnnotations: "PrimmaryAnnotationSholdBeChosen"
+                            ),
+                            tables: new(
+                                new RuleTable(
+                                    operation: RuleItemOperation.Join,
+                                    tableName: "Area",
+                                    keyFieldName: "CrmId",
+                                    fields: new(
+                                        new RuleField(
+                                            crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                            sqlName: "LowerCaseName",
+                                            type: RuleFieldType.LowerString,
+                                            matcherRule: default,
+                                            skipNullable: false),
+                                        new RuleField(
+                                            crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                            sqlName: "CityCapitalization",
+                                            type: RuleFieldType.Decimal,
+                                            matcherRule: default,
+                                            skipNullable: false))))))),
+            },
         };
 }
