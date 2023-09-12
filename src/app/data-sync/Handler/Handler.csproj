@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Sync\InOut.Sync.csproj" />
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Sync\Contract.Sync.csproj" />
   </ItemGroup>
 
   <ItemGroup>

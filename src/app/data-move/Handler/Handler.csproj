@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
-    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\InOut.Move\InOut.Move.csproj" />
+    <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Move\Contract.Move.csproj" />
   </ItemGroup>
 
   <ItemGroup>
