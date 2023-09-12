@@ -22,8 +22,11 @@ jobs:
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
-    - name: Restore platform-dataverse-to-sql-sync.sln
+    - name: Restore Platform.DataverseToSqlSync.sln
       run: dotnet restore
 
-    - name: Build platform-dataverse-to-sql-sync.sln
+    - name: Build Platform.DataverseToSqlSync.sln
       run: dotnet build --no-restore  -c Release
+
+    - name: Test Platform.DataverseToSqlSync.sln
+      run: dotnet test

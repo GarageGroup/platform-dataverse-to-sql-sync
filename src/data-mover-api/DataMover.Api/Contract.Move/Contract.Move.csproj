@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>GarageGroup.Platform.DataMover.DataMoverApi.InOut.Sync</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataMover.DataMoverApi.Contract.Move</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

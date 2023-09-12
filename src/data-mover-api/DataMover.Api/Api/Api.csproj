@@ -6,16 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InOut.Move\InOut.Move.csproj" />
-    <ProjectReference Include="..\InOut.Sync\InOut.Sync.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\DbData.Api\InOut\InOut.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\InOut\InOut.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\InOut\InOut.csproj" />
+    <ProjectReference Include="..\Contract.Move\Contract.Move.csproj" />
+    <ProjectReference Include="..\Contract.Sync\Contract.Sync.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\DbData.Api\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\Contract\Contract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.3.0" />
-    <PackageReference Include="GarageGroup.Core.Collections.FlatArray.Extensions" Version="1.8.0" />
+    <PackageReference Include="GarageGroup.Core.Collections.FlatArray.Extensions" Version="1.9.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
     <PackageReference Include="PrimeFuncPack.Dependency" Version="2.0.2" />
     <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />

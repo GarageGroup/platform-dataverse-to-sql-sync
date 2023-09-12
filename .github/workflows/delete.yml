@@ -20,7 +20,7 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS_ARTIFACT }}
-        
+
     - name: Delete from Azure Blob Storage
       uses: azure/CLI@v1
       with:
