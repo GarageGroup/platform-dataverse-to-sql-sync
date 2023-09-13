@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using GarageGroup;
 
 namespace GarageGroup.Platform.DataMover;
 
@@ -126,12 +125,14 @@ partial class RuleSetGetFunc
             const int splitLength = 2;
             const int annotationIndex = 1;
 
-            if(field.Crm?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedCrm && string.IsNullOrEmpty(splittedCrm[annotationIndex]) is false)
+            if (field.Crm?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedCrm
+                && string.IsNullOrEmpty(splittedCrm[annotationIndex]) is false)
             {
                 yield return splittedCrm[annotationIndex];
             }
 
-            if(field.LookupName?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedLookupName && string.IsNullOrEmpty(splittedLookupName[annotationIndex]) is false)
+            if (field.LookupName?.Trim().Split(annotationDelimiter) is { Length: splitLength } splittedLookupName
+                && string.IsNullOrEmpty(splittedLookupName[annotationIndex]) is false)
             {
                 yield return splittedLookupName[annotationIndex];
             }

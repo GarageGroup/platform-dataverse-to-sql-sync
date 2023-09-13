@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GarageGroup;
 using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataMover;
