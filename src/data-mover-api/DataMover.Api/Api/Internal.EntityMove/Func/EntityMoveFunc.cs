@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using GarageGroup;
 using Microsoft.Extensions.Logging;
 
 namespace GarageGroup.Platform.DataMover;
@@ -59,7 +58,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
         =>
         timer.ElapsedMilliseconds < DefaultDbBatchTimeoutMilliseconds;
 
-    private static async ValueTask<int> InvokeAllAsync(List<Task<int>> tasks)
+    private static async ValueTask<int> InvokeAllAsync(IReadOnlyList<Task<int>> tasks)
     {
         if (tasks.Count is 0)
         {
