@@ -21,7 +21,7 @@ internal static class Application
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()
         .With(
-            MicrosoftDbProvider.Configure("SqlDb").UseSqlApi().UseDbDataApi())
+            MicrosoftDbProvider.Configure("SqlDb").UseSqlApi().UseDatabaseApi())
         .With(
             Dependency.From(ResolveRuleSetGetOption).UseRuleSetGetFunc())
         .With(

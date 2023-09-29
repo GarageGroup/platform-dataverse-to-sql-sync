@@ -5,9 +5,9 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-partial class DbDataApi
+partial class DatabaseApi
 {
-    public ValueTask<DbDataDeleteOut> DeleteAsync(DbDataDeleteIn input, CancellationToken cancellationToken)
+    public ValueTask<DbDataDeleteOut> DeleteDataAsync(DbDataDeleteIn input, CancellationToken cancellationToken)
         =>
         AsyncPipeline.Pipe(
             input ?? throw new ArgumentNullException(nameof(input)), cancellationToken)

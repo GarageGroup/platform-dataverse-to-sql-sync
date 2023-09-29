@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-partial class DbDataApiTest
+partial class DatabaseApiTest
 {
     [Fact]
     public static void UpdateAsync_InputIsNull_ExpectArgumentNullException()
@@ -15,14 +15,14 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(15);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
         Assert.ThrowsAsync<ArgumentNullException>(TestAsync);
 
         async Task TestAsync()
             =>
-            await func.UpdateAsync(null!, cancellationToken);
+            await func.UpdateDataAsync(null!, cancellationToken);
     }
 
     [Fact]
@@ -31,25 +31,25 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(5);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: true);
 
-        var result = func.UpdateAsync(SomeUpdateInput, cancellationToken);
+        var result = func.UpdateDataAsync(SomeUpdateInput, cancellationToken);
         Assert.True(result.IsCanceled);
     }
 
     [Theory]
-    [MemberData(nameof(DbDataApiTestSource.InputUpdateTestData), MemberType = typeof(DbDataApiTestSource))]
+    [MemberData(nameof(DatabaseApiTestSource.InputUpdateTestData), MemberType = typeof(DatabaseApiTestSource))]
     public static async Task UpdateAsync_InputItemsAreNotEmpty_ExpectDbUpdateCalledOnce(
         DbDataUpdateIn input, DateTimeOffset dateTimeOffset, IDbQuery expected)
     {
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(default);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(dateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
-        _ = await func.UpdateAsync(input, cancellationToken);
+        _ = await func.UpdateDataAsync(input, cancellationToken);
         mockSqlQuerySupplier.Verify(func => func.ExecuteNonQueryAsync(expected, cancellationToken), Times.Once);
     }
 
@@ -59,11 +59,11 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(default);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
         var input = new DbDataUpdateIn("table1", "id", new(), DbDataUpdateType.CreateOrUpdate, false);
 
-        _ = await func.UpdateAsync(input, cancellationToken);
+        _ = await func.UpdateDataAsync(input, cancellationToken);
         mockSqlQuerySupplier.Verify(func => func.ExecuteNonQueryAsync(It.IsAny<IDbQuery>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
@@ -73,7 +73,7 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(10);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
         var input = new DbDataUpdateIn(
@@ -82,11 +82,11 @@ partial class DbDataApiTest
             items: new(
                 new DbDataItem(
                     crmId: Guid.Parse("9c6c896b-506b-4bab-ba4b-546ded8d4b81"),
-                    fieldValues: new(new DbDataFieldValue("field1", string.Empty)))),
+                    fieldValues: new(new DataFieldValue("field1", string.Empty)))),
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: false);
 
-        var result = await func.UpdateAsync(input, cancellationToken);
+        var result = await func.UpdateDataAsync(input, cancellationToken);
         var expected = new DbDataUpdateOut(10);
 
         Assert.StrictEqual(expected, result);
@@ -98,7 +98,7 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(10);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
         var input = new DbDataUpdateIn(
@@ -108,7 +108,7 @@ partial class DbDataApiTest
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: false);
 
-        var result = await func.UpdateAsync(input, cancellationToken);
+        var result = await func.UpdateDataAsync(input, cancellationToken);
         var expected = new DbDataUpdateOut(0);
 
         Assert.StrictEqual(expected, result);

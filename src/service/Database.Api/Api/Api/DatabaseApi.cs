@@ -2,7 +2,7 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-internal sealed partial class DbDataApi : IDbDataApi
+internal sealed partial class DatabaseApi : IDatabaseApi
 {
     private const int DefaultTimeoutInSeconds = 120;
 
@@ -14,7 +14,7 @@ internal sealed partial class DbDataApi : IDbDataApi
 
     private readonly IDateTimeOffsetProvider dateTimeOffsetProvider;
 
-    internal DbDataApi(ISqlExecuteNonQuerySupplier sqlApi, IDateTimeOffsetProvider dateTimeOffsetProvider)
+    internal DatabaseApi(ISqlExecuteNonQuerySupplier sqlApi, IDateTimeOffsetProvider dateTimeOffsetProvider)
         =>
         (this.sqlApi, this.dateTimeOffsetProvider) = (sqlApi, dateTimeOffsetProvider);
 }

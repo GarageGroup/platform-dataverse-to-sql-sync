@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-partial class DbDataApiTestSource
+partial class DatabaseApiTestSource
 {
     public static IEnumerable<object[]> InputUpdateTestData
         =>
@@ -269,8 +268,8 @@ partial class DbDataApiTestSource
                         new DbDataItem(
                             crmId: Guid.Parse("c70fba50-d08b-4ccf-9fa8-129dcbfe4037"),
                             fieldValues: new(
-                                new DbDataFieldValue("name", "silver light"),
-                                new DbDataFieldValue("id", "21")))),
+                                new DataFieldValue("name", "silver light"),
+                                new DataFieldValue("id", "21")))),
                     type: DbDataUpdateType.UpdateOnly,
                     syncTime: true),
                 new DateTimeOffset(2022, 8, 10, 1, 32, 1, 4, default),

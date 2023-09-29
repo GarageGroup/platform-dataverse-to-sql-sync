@@ -5,5 +5,5 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public interface IDbDataDeleteSupplier
 {
-    ValueTask<DbDataDeleteOut> DeleteAsync(DbDataDeleteIn input, CancellationToken cancellationToken);
+    ValueTask<DbDataDeleteOut> DeleteDataAsync(DbDataDeleteIn input, CancellationToken cancellationToken);
 }

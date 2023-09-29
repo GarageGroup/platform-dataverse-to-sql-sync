@@ -1,8 +1,8 @@
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public sealed record class DbDataFieldValue
+public sealed record class DataFieldValue
 {
-    public DbDataFieldValue(string name, object? value)
+    public DataFieldValue(string name, object? value)
     {
         Name = name ?? string.Empty;
         Value = value;

@@ -17,7 +17,7 @@ partial class Application
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()
         .With(
-            UseSqlApi().UseDbDataApi())
+            UseSqlApi().UseDatabaseApi())
         .With(
             Dependency.From(ResolveRuleSetGetOption).UseRuleSetGetFunc())
         .With(

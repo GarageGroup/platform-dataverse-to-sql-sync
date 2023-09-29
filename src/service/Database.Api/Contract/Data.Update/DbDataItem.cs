@@ -4,7 +4,7 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public sealed record class DbDataItem
 {
-    public DbDataItem(Guid crmId, FlatArray<DbDataFieldValue> fieldValues)
+    public DbDataItem(Guid crmId, FlatArray<DataFieldValue> fieldValues)
     {
         CrmId = crmId;
         FieldValues = fieldValues;
@@ -12,5 +12,5 @@ public sealed record class DbDataItem
 
     public Guid CrmId { get; }
 
-    public FlatArray<DbDataFieldValue> FieldValues { get; }
+    public FlatArray<DataFieldValue> FieldValues { get; }
 }

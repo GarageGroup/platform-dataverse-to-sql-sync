@@ -8,15 +8,15 @@ using PrimeFuncPack;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public static class DbDataApiDependency
+public static class DatabaseApiDependency
 {
-    public static Dependency<IDbDataApi> UseDbDataApi<TSqlApi>(this Dependency<TSqlApi> dependency)
+    public static Dependency<IDatabaseApi> UseDatabaseApi<TSqlApi>(this Dependency<TSqlApi> dependency)
         where TSqlApi : ISqlExecuteNonQuerySupplier
     {
         ArgumentNullException.ThrowIfNull(dependency);
-        return dependency.Map<IDbDataApi>(Create);
+        return dependency.Map<IDatabaseApi>(Create);
 
-        static DbDataApi Create(TSqlApi sqlApi)
+        static DatabaseApi Create(TSqlApi sqlApi)
         {
             ArgumentNullException.ThrowIfNull(sqlApi);
             return new(sqlApi, DateTimeOffsetProvider.Instance);

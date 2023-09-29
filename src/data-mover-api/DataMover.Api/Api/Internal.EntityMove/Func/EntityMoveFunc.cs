@@ -20,7 +20,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
 
     private readonly ICrmEntityFlowGetFunc flowGetFunc;
 
-    private readonly IDbDataApi dbDataApi;
+    private readonly IDatabaseApi databaseApi;
 
     private readonly DataMoveOption option;
 
@@ -28,12 +28,12 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
 
     internal EntityMoveFunc(
         ICrmEntityFlowGetFunc flowGetFunc,
-        IDbDataApi dbDataApi,
+        IDatabaseApi databaseApi,
         DataMoveOption option,
         ILoggerFactory? loggerFactory)
     {
         this.flowGetFunc = flowGetFunc;
-        this.dbDataApi = dbDataApi;
+        this.databaseApi = databaseApi;
         this.option = option;
         logger = loggerFactory?.CreateLogger<EntityMoveFunc>();
     }
@@ -74,7 +74,7 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
         return result.Sum();
     }
 
-    private static DbDataFieldValue GetFieldValue(CrmEntity crmEntity, RuleField ruleField)
+    private static DataFieldValue GetFieldValue(CrmEntity crmEntity, RuleField ruleField)
     {
         return new(
             name: ruleField.SqlName,

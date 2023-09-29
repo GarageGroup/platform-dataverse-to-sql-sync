@@ -118,7 +118,7 @@ partial class EntityMoveFunc
 
         foreach (var crmEntity in entitySet.Entities)
         {
-            var dbDataItem = GetDbDataItem(crmEntity, rule.Fields);
+            var dbDataItem = GetDataItem(crmEntity, rule.Fields);
             if (dbDataItem.FieldValues.FirstOrAbsent(CheckIfSkipValue).OnPresent(LogSkipped).IsPresent)
             {
                 continue;
@@ -153,11 +153,11 @@ partial class EntityMoveFunc
 
         return movedEntities + await InvokeAllAsync(dbTasks).ConfigureAwait(false);
 
-        bool CheckIfSkipValue(DbDataFieldValue fieldValue)
+        bool CheckIfSkipValue(DataFieldValue fieldValue)
             =>
             fieldValue.Value is null && skippedFields.Contains(fieldValue.Name, StringComparer.InvariantCultureIgnoreCase);
 
-        void LogSkipped(DbDataFieldValue fieldValue)
+        void LogSkipped(DataFieldValue fieldValue)
             =>
             logger?.LogWarning("Skip due to field '{skippedField}' value is null", fieldValue.Name);
 
@@ -172,7 +172,7 @@ partial class EntityMoveFunc
 
             logger?.LogInformation("Update database items: {count}", items.Length);
 
-            var updateOutput = await dbDataApi.UpdateAsync(updateInput, token).ConfigureAwait(false);
+            var updateOutput = await databaseApi.UpdateDataAsync(updateInput, token).ConfigureAwait(false);
             var affectedRows = updateOutput.SynchronizedRows;
 
             logger?.LogInformation("#Thread: {threadId}; Affected rows: {count}", Environment.CurrentManagedThreadId, affectedRows);
@@ -192,7 +192,7 @@ partial class EntityMoveFunc
     {
         logger?.LogInformation("Delete entities from the table: {table}. SyncTime: {syncTime}", input.TableName, input.SyncTime);
 
-        var count = await dbDataApi.DeleteAsync(input, cancellationToken).ConfigureAwait(false);
+        var count = await databaseApi.DeleteDataAsync(input, cancellationToken).ConfigureAwait(false);
 
         logger?.LogInformation("Deleted: {count}", count.DeletedRows);
     }
@@ -214,13 +214,13 @@ partial class EntityMoveFunc
         return builder.Append(" and (").Append(crmData.Filter).Append(')').ToString();
     }
 
-    private static DbDataItem GetDbDataItem(CrmEntity crmEntity, FlatArray<RuleField> fields)
+    private static DbDataItem GetDataItem(CrmEntity crmEntity, FlatArray<RuleField> fields)
     {
         return new(
             crmId: crmEntity.Id,
             fieldValues: fields.Map(InnerGetFieldValue));
 
-        DbDataFieldValue InnerGetFieldValue(RuleField ruleField)
+        DataFieldValue InnerGetFieldValue(RuleField ruleField)
             =>
             GetFieldValue(crmEntity, ruleField);
     }

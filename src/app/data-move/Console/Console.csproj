@@ -15,8 +15,8 @@
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Move\Contract.Move.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Sync\Contract.Sync.csproj" />
     <ProjectReference Include="..\..\..\service\CrmEntityFlow.Get\Func\Func.csproj" />
-    <ProjectReference Include="..\..\..\service\DbData.Api\Api\Api.csproj" />
-    <ProjectReference Include="..\..\..\service\DbData.Api\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\Database.Api\Api\Api.csproj" />
+    <ProjectReference Include="..\..\..\service\Database.Api\Contract\Contract.csproj" />
     <ProjectReference Include="..\..\..\service\RuleSet.Get\Func\Func.csproj" />
     <ProjectReference Include="..\..\..\service\RuleSet.Get\Contract\Contract.csproj" />
     <ProjectReference Include="..\Handler\Handler.csproj" />
