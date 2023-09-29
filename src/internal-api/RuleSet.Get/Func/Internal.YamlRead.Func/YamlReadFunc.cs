@@ -2,7 +2,7 @@ using System;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class YamlReadFunc : IAsyncFunc<string, ConfigurationYaml>
 {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GarageGroup.Infra;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 static class Program
 {

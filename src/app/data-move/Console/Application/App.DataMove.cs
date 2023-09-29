@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PrimeFuncPack;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 partial class Application
 {

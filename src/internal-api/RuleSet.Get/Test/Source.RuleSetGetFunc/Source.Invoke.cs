@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 partial class RuleSetGetTestSource
 {

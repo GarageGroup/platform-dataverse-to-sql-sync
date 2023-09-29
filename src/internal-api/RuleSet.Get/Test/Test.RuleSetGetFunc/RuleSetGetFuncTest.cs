@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Moq;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 public static partial class RuleSetGetTest
 {
@@ -44,7 +44,7 @@ public static partial class RuleSetGetTest
         _ = mock
             .Setup(static supplier => supplier.InvokeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(configuration);
-        
+
         return mock;
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public interface ICrmEntityFlowGetFunc
 {

@@ -3,7 +3,7 @@ using System.Threading;
 using GarageGroup.Infra;
 using Moq;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 public static partial class DbDataApiTest
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using GarageGroup.Infra;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 partial class DbDataApiTestSource
 {

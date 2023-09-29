@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 partial class RuleSetGetTest
 {

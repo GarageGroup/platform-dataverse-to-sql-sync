@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 partial class RuleSetGetFunc
 {
@@ -106,7 +106,7 @@ partial class RuleSetGetFunc
     private static string? CalculateAnnotations(EntityYaml entity)
     {
         var annotations = entity.Annotations?.Trim();
-        if(string.IsNullOrEmpty(annotations) is false)
+        if (string.IsNullOrEmpty(annotations) is false)
         {
             return annotations;
         }
@@ -116,7 +116,7 @@ partial class RuleSetGetFunc
                 static table => table?.Fields?.SelectMany(ExtractAnnotation) ?? Enumerable.Empty<string>())
             .Distinct()
             .ToArray();
-        
+
         return annotationsArray is { Length: > 0 } ? string.Join(",", annotationsArray) : null;
 
         static IEnumerable<string> ExtractAnnotation(FieldYaml field)

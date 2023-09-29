@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>GarageGroup.Platform.DataMover.InternalApi.CrmEntityFlow.Get.Contract</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.CrmEntityFlow.Get.Contract</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

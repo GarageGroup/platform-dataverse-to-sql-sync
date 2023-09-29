@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public sealed record class CrmEntityFieldValue
 {

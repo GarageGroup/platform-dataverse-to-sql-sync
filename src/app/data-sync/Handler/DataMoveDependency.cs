@@ -1,7 +1,7 @@
 using System;
 using PrimeFuncPack;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public static class DataMoveDependency
 {

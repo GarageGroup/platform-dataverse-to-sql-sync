@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>GarageGroup.Platform.DataMover.Data.Move.Console</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.Data.Move.Console</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

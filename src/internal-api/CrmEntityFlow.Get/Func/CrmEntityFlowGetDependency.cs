@@ -3,10 +3,10 @@ using System.Runtime.CompilerServices;
 using GarageGroup.Infra;
 using PrimeFuncPack;
 
-[assembly: InternalsVisibleTo("GarageGroup.Platform.DataMover.InternalApi.CrmEntityFlow.Get.Test")]
+[assembly: InternalsVisibleTo("GarageGroup.Platform.DataverseToSqlSync.InternalApi.CrmEntityFlow.Get.Test")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public static class CrmEntityFlowGetDependency
 {
