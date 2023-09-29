@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public interface IDatabaseDataDeleteSupplier
+public interface IDbDataDeleteSupplier
 {
     ValueTask<DbDataDeleteOut> DeleteDataAsync(DbDataDeleteIn input, CancellationToken cancellationToken);
 }

@@ -1,5 +1,5 @@
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public interface IDatabaseApi : IDatabaseDataUpdateSupplier, IDatabaseDataDeleteSupplier
+public interface IDatabaseApi : IDbDataUpdateSupplier, IDbDataDeleteSupplier
 {
 }
