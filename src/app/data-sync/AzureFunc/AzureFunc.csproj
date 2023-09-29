@@ -11,12 +11,12 @@
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Sync\Contract.Sync.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Move\Contract.Move.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\Contract\Contract.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\Func\Func.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\DbData.Api\Contract\Contract.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\DbData.Api\Api\Api.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\Func\Func.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\CrmEntityFlow.Get\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\CrmEntityFlow.Get\Func\Func.csproj" />
+    <ProjectReference Include="..\..\..\service\DbData.Api\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\DbData.Api\Api\Api.csproj" />
+    <ProjectReference Include="..\..\..\service\RuleSet.Get\Func\Func.csproj" />
+    <ProjectReference Include="..\..\..\service\RuleSet.Get\Contract\Contract.csproj" />
     <ProjectReference Include="..\Handler\Handler.csproj" />
   </ItemGroup>
 
