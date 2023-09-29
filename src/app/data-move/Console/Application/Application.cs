@@ -1,7 +1,7 @@
 using GarageGroup.Infra;
 using PrimeFuncPack;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal static partial class Application
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public readonly record struct RuleSetGetOut
 {

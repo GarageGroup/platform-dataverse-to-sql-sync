@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 internal static partial class CrmEntityFlowGetFuncSource
 {

@@ -1,4 +1,4 @@
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 public static partial class RuleSetGetTestSource
 {

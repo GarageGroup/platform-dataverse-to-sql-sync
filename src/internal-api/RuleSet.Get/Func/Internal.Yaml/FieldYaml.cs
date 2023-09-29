@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed record class FieldYaml
 {

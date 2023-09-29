@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using GarageGroup.Infra;
 
-namespace GarageGroup.Platform.DataMover.Test;
+namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 partial class CrmEntityFlowGetFuncSource
 {

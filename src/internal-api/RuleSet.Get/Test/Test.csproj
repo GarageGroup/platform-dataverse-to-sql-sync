@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>GarageGroup.Platform.DataMover.InternalApi.RuleSet.Get.Test</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.RuleSet.Get.Test</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

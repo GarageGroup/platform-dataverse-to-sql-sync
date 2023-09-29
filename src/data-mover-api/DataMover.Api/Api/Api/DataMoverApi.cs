@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class DataMoverApi : IDataMoverApi
 {

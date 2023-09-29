@@ -1,4 +1,4 @@
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public interface IDbDataApi : IDbDataUpdateSupplier, IDbDataDeleteSupplier
 {

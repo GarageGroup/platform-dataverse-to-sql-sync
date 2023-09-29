@@ -1,6 +1,6 @@
 using GarageGroup.Infra;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class CrmEntityFlowGetFunc : ICrmEntityFlowGetFunc
 {

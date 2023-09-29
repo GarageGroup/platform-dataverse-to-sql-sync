@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public sealed record class EventDataJson
 {

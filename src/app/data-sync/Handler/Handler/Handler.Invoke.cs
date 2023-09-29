@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GarageGroup.Infra;
 
-namespace GarageGroup.Platform.DataMover;
+namespace GarageGroup.Platform.DataverseToSqlSync;
 
 partial class DataSyncHandler
 {

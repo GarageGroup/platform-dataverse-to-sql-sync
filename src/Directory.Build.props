@@ -6,7 +6,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <InvariantGlobalization>false</InvariantGlobalization>
     <IsPackable>false</IsPackable>
-    <RootNamespace>GarageGroup.Platform.DataMover</RootNamespace>
+    <RootNamespace>GarageGroup.Platform.DataverseToSqlSync</RootNamespace>
   </PropertyGroup>
   
 </Project>
