@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-partial class DbDataApiTest
+partial class DatabaseApiTest
 {
     [Fact]
     public static void DeleteAsync_InputIsNull_ExpectArgumentNullException()
@@ -15,14 +15,14 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(21);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
         Assert.ThrowsAsync<ArgumentNullException>(TestAsync);
 
         async Task TestAsync()
             =>
-            await func.DeleteAsync(null!, cancellationToken);
+            await func.DeleteDataAsync(null!, cancellationToken);
     }
 
     [Fact]
@@ -31,25 +31,25 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(15);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: true);
 
-        var result = func.DeleteAsync(SomeDeleteInput, cancellationToken);
+        var result = func.DeleteDataAsync(SomeDeleteInput, cancellationToken);
         Assert.True(result.IsCanceled);
     }
 
     [Theory]
-    [MemberData(nameof(DbDataApiTestSource.InputDeleteTestData), MemberType = typeof(DbDataApiTestSource))]
+    [MemberData(nameof(DatabaseApiTestSource.InputDeleteTestData), MemberType = typeof(DatabaseApiTestSource))]
     public static async Task DeleteAsync_InputIsNotNull_ExpectDbDeleteCalledOnce(
         DbDataDeleteIn input, DateTimeOffset offset, DbDeleteQuery query)
     {
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(11);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(offset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
-        _ = await func.DeleteAsync(input, cancellationToken);
+        _ = await func.DeleteDataAsync(input, cancellationToken);
         mockSqlQuerySupplier.Verify(func => func.ExecuteNonQueryAsync(query, cancellationToken), Times.Once);
     }
 
@@ -59,10 +59,10 @@ partial class DbDataApiTest
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(10);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
 
-        var func = new DbDataApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
+        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
-        var result = await func.DeleteAsync(SomeDeleteInput, cancellationToken);
+        var result = await func.DeleteDataAsync(SomeDeleteInput, cancellationToken);
         var expected = new DbDataDeleteOut(10);
 
         Assert.StrictEqual(expected, result);

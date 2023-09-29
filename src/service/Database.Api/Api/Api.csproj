@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.DbData.Api</AssemblyName>
+    <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.Database.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

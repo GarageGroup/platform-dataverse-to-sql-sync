@@ -4,7 +4,7 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-partial class DbDataApiTestSource
+partial class DatabaseApiTestSource
 {
     public static IEnumerable<object[]> InputDeleteTestData
         =>

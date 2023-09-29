@@ -6,9 +6,9 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-partial class DbDataApi
+partial class DatabaseApi
 {
-    public ValueTask<DbDataUpdateOut> UpdateAsync(DbDataUpdateIn input, CancellationToken cancellationToken)
+    public ValueTask<DbDataUpdateOut> UpdateDataAsync(DbDataUpdateIn input, CancellationToken cancellationToken)
         =>
         AsyncPipeline.Pipe(
             input ?? throw new ArgumentNullException(nameof(input)), cancellationToken)
@@ -71,11 +71,11 @@ partial class DbDataApi
             thenQuery: dbItemUpdateQuery,
             elseQuery: dbItemInsertQuery);
 
-        bool IsNotKeyField(DbDataFieldValue field)
+        bool IsNotKeyField(DataFieldValue field)
             =>
             string.Equals(field.Name, input.KeyFieldName, StringComparison.InvariantCulture) is false;
 
-        DbFieldValue MapFieldValue(DbDataFieldValue field)
+        DbFieldValue MapFieldValue(DataFieldValue field)
             =>
             new(field.Name, field.Value, $"{field.Name}{index}");
 

@@ -7,7 +7,7 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 public static class DataMoverApiDependency
 {
     public static Dependency<IDataMoverApi> UseDataMoverApi(
-        this Dependency<ICrmEntityFlowGetFunc, IDbDataApi, IRuleSetGetFunc, DataMoveOption> dependency)
+        this Dependency<ICrmEntityFlowGetFunc, IDatabaseApi, IRuleSetGetFunc, DataMoveOption> dependency)
     {
         ArgumentNullException.ThrowIfNull(dependency);
         return dependency.Fold<IDataMoverApi>(CreateDataMoverApi);
@@ -16,12 +16,12 @@ public static class DataMoverApiDependency
     private static DataMoverApi CreateDataMoverApi(
         IServiceProvider serviceProvider,
         ICrmEntityFlowGetFunc entityFlowGetFunc,
-        IDbDataApi dbDataApi,
+        IDatabaseApi databaseApi,
         IRuleSetGetFunc ruleSetGetFunc,
         DataMoveOption option)
     {
         ArgumentNullException.ThrowIfNull(entityFlowGetFunc);
-        ArgumentNullException.ThrowIfNull(dbDataApi);
+        ArgumentNullException.ThrowIfNull(databaseApi);
         ArgumentNullException.ThrowIfNull(ruleSetGetFunc);
 
         var loggerFactory = serviceProvider.GetServiceOrAbsent<ILoggerFactory>().OrDefault();
@@ -30,7 +30,7 @@ public static class DataMoverApiDependency
             ruleSetGetFunc: ruleSetGetFunc,
             entityMoveFunc: new EntityMoveFunc(
                 flowGetFunc: entityFlowGetFunc,
-                dbDataApi: dbDataApi,
+                databaseApi: databaseApi,
                 option: option,
                 loggerFactory: loggerFactory),
             loggerFactory: loggerFactory);

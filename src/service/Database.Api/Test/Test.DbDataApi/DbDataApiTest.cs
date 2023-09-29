@@ -5,7 +5,7 @@ using Moq;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-public static partial class DbDataApiTest
+public static partial class DatabaseApiTest
 {
     private static readonly DbDataDeleteIn SomeDeleteInput
         =
@@ -23,7 +23,7 @@ public static partial class DbDataApiTest
                 new DbDataItem(
                     Guid.Parse("a90d93fe-ba9e-4deb-93e0-d2b8e52ccc32"),
                     new(
-                        new DbDataFieldValue("someName", "someValue")))),
+                        new DataFieldValue("someName", "someValue")))),
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: true);
 

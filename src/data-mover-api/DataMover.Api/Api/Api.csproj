@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Contract.Move\Contract.Move.csproj" />
     <ProjectReference Include="..\Contract.Sync\Contract.Sync.csproj" />
-    <ProjectReference Include="..\..\..\service\DbData.Api\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\Database.Api\Contract\Contract.csproj" />
     <ProjectReference Include="..\..\..\service\CrmEntityFlow.Get\Contract\Contract.csproj" />
     <ProjectReference Include="..\..\..\service\RuleSet.Get\Contract\Contract.csproj" />
   </ItemGroup>
