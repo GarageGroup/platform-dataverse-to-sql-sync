@@ -27,31 +27,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract.Move", "src\data-m
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract.Sync", "src\data-mover-api\DataMover.Api\Contract.Sync\Contract.Sync.csproj", "{CED9321D-5C75-4C96-B26B-7AF525BACDB7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "internal-api", "internal-api", "{BF8016D1-2881-4C77-9C67-7FE6642ADFB7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{BF8016D1-2881-4C77-9C67-7FE6642ADFB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrmEntityFlow.Get", "CrmEntityFlow.Get", "{71B43D2E-0915-4CE9-95CF-9A6BD6CA5354}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Func", "src\internal-api\CrmEntityFlow.Get\Func\Func.csproj", "{95304D91-D0BD-419C-A694-ECC7EB520501}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Func", "src\service\CrmEntityFlow.Get\Func\Func.csproj", "{95304D91-D0BD-419C-A694-ECC7EB520501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\internal-api\CrmEntityFlow.Get\Contract\Contract.csproj", "{FA40B20D-7305-4E4A-9474-1B5900811C38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\service\CrmEntityFlow.Get\Contract\Contract.csproj", "{FA40B20D-7305-4E4A-9474-1B5900811C38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbData.Api", "DbData.Api", "{0A3F8A90-FDB5-43D6-AF83-47510CB125A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "src\internal-api\DbData.Api\Api\Api.csproj", "{D66B2CFB-DE40-4F4C-B1B2-6B6601FC8C5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "src\service\DbData.Api\Api\Api.csproj", "{D66B2CFB-DE40-4F4C-B1B2-6B6601FC8C5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\internal-api\DbData.Api\Contract\Contract.csproj", "{8C433EBE-C846-42D4-9A8F-EBEE3F9AC7C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\service\DbData.Api\Contract\Contract.csproj", "{8C433EBE-C846-42D4-9A8F-EBEE3F9AC7C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\internal-api\DbData.Api\Test\Test.csproj", "{AC3D2B1D-8E6C-4C6A-B456-C83EA33D2D10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\service\DbData.Api\Test\Test.csproj", "{AC3D2B1D-8E6C-4C6A-B456-C83EA33D2D10}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RuleSet.Get", "RuleSet.Get", "{22C2E6E3-454A-4DC3-9AA4-CE5E14BF44E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Func", "src\internal-api\RuleSet.Get\Func\Func.csproj", "{7E1F0EA3-5A54-4EC3-8944-E54FF0EC0D4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Func", "src\service\RuleSet.Get\Func\Func.csproj", "{7E1F0EA3-5A54-4EC3-8944-E54FF0EC0D4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\internal-api\RuleSet.Get\Contract\Contract.csproj", "{FCFC0BB2-67B3-4AD3-8F70-CD42C253E1B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "src\service\RuleSet.Get\Contract\Contract.csproj", "{FCFC0BB2-67B3-4AD3-8F70-CD42C253E1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\internal-api\RuleSet.Get\Test\Test.csproj", "{8148012A-810F-4853-999E-8E48AF9A14F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\service\RuleSet.Get\Test\Test.csproj", "{8148012A-810F-4853-999E-8E48AF9A14F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\internal-api\CrmEntityFlow.Get\Test\Test.csproj", "{79DEEBBE-0D77-4AE4-927D-47719C5B990A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\service\CrmEntityFlow.Get\Test\Test.csproj", "{79DEEBBE-0D77-4AE4-927D-47719C5B990A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

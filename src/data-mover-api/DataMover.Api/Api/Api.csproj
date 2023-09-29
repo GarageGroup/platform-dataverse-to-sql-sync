@@ -8,9 +8,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Contract.Move\Contract.Move.csproj" />
     <ProjectReference Include="..\Contract.Sync\Contract.Sync.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\DbData.Api\Contract\Contract.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\CrmEntityFlow.Get\Contract\Contract.csproj" />
-    <ProjectReference Include="..\..\..\internal-api\RuleSet.Get\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\DbData.Api\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\CrmEntityFlow.Get\Contract\Contract.csproj" />
+    <ProjectReference Include="..\..\..\service\RuleSet.Get\Contract\Contract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
