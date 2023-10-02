@@ -1,6 +1,6 @@
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public enum WriteAuditDateTimeFailureCode
+public enum AuditDateTimeWriteFailureCode
 {
     Unknown,
 

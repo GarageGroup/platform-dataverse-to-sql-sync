@@ -7,8 +7,8 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 partial class DatabaseApi
 {
-    public ValueTask<Result<Unit, Failure<WriteAuditDateTimeFailureCode>>> WriteAuditDateTimeAsync(
-        WriteAuditDateTimeIn input, CancellationToken cancellationToken)
+    public ValueTask<Result<Unit, Failure<AuditDateTimeWriteFailureCode>>> WriteAuditDateTimeAsync(
+        AuditDateTimeWriteIn input, CancellationToken cancellationToken)
         =>
         AsyncPipeline.Pipe(
             input, cancellationToken)
@@ -23,15 +23,15 @@ partial class DatabaseApi
         .MapSuccess(
             success => Unit.From(success));
 
-    private static Result<WriteAuditDateTimeIn, Failure<WriteAuditDateTimeFailureCode>> ValidateInput(WriteAuditDateTimeIn input)
+    private static Result<AuditDateTimeWriteIn, Failure<AuditDateTimeWriteFailureCode>> ValidateInput(AuditDateTimeWriteIn input)
         =>
         string.IsNullOrWhiteSpace(input.EntityName) switch
         {
             false => input,
-            _ => Failure.Create(WriteAuditDateTimeFailureCode.EntityMustBeSpecified, "Entity name must be specified")
+            _ => Failure.Create(AuditDateTimeWriteFailureCode.EntityMustBeSpecified, "Entity name must be specified")
         };
 
-    private static DbUpdateQuery CreateAuditDateDbQuery(WriteAuditDateTimeIn input)
+    private static DbUpdateQuery CreateAuditDateDbQuery(AuditDateTimeWriteIn input)
         =>
         new(
             tableName: AuditDateTimeTableName,
@@ -40,7 +40,7 @@ partial class DatabaseApi
                 new(nameof(input.AuditDateTime), input.AuditDateTime)),
             filter: new DbParameterFilter(nameof(input.EntityName), DbFilterOperator.Equal, input.EntityName));
 
-    private static WriteAuditDateTimeFailureCode MapUnknownFailureCode(Unit _)
+    private static AuditDateTimeWriteFailureCode MapUnknownFailureCode(Unit _)
         =>
-        WriteAuditDateTimeFailureCode.Unknown;
+        AuditDateTimeWriteFailureCode.Unknown;
 }

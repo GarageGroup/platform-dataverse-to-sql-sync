@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-public sealed record class WriteAuditDateTimeIn
+public sealed record class AuditDateTimeWriteIn
 {
-    public WriteAuditDateTimeIn(string entityName, DateTime auditDateTime)
+    public AuditDateTimeWriteIn(string entityName, DateTime auditDateTime)
         =>
         (EntityName, AuditDateTime) = (entityName, auditDateTime);
 

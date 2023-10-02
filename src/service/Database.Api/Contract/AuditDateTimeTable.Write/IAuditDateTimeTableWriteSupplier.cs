@@ -6,5 +6,5 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public interface IAuditDateTimeTableWriteSupplier
 {
-    ValueTask<Result<Unit, Failure<WriteAuditDateTimeFailureCode>>> WriteAuditDateTimeAsync(WriteAuditDateTimeIn input, CancellationToken cancellationToken);
+    ValueTask<Result<Unit, Failure<AuditDateTimeWriteFailureCode>>> WriteAuditDateTimeAsync(AuditDateTimeWriteIn input, CancellationToken cancellationToken);
 }
