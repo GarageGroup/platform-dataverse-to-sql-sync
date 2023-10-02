@@ -6,5 +6,5 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 public interface IAuditDateTimeTableEnsureSupplier
 {
-    ValueTask EnsureAuditDateTimeTableAsync(CancellationToken cancellationToken);
+    ValueTask<Unit> EnsureAuditDateTimeTableAsync(Unit _, CancellationToken cancellationToken);
 }

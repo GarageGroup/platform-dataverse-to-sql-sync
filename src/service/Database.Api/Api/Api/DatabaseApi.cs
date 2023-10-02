@@ -15,10 +15,10 @@ internal sealed partial class DatabaseApi : IDatabaseApi
             BEGIN
             CREATE TABLE [_AuditDateTime]( 
                 [EntityName] varchar(100) NOT NULL,
-                [AuditDateTime] datetimeoffset NOT NULL,
+                [AuditDateTime] datetime NOT NULL,
+                [CreatedAt] datetimeoffset DEFAULT SYSDATETIMEOFFSET() NOT NULL,
                 PRIMARY KEY (EntityName)
             );
-            CREATE INDEX AuditDateTimeCreationTimeIndex ON [_AuditDateTime](AuditDateTime DESC);
             END
         """;
 
