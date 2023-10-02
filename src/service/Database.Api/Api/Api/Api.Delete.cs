@@ -20,7 +20,7 @@ partial class DatabaseApi
                 TimeoutInSeconds = DefaultTimeoutInSeconds
             })
         .PipeValue(
-            sqlApi.ExecuteNonQueryAsync)
+            sqlExecuteNonQueryApi.ExecuteNonQueryAsync)
         .Pipe(
             static affectedRows => new DbDataDeleteOut(affectedRows));
 
