@@ -8,7 +8,7 @@ public sealed record class AuditDateTimeWriteIn
 {
     public AuditDateTimeWriteIn(string entityName, DateTime auditDateTime)
         =>
-        (EntityName, AuditDateTime) = (entityName, auditDateTime);
+        (EntityName, AuditDateTime) = (entityName ?? string.Empty, auditDateTime);
 
     public string EntityName { get; }
 
