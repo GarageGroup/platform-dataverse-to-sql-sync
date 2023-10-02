@@ -10,11 +10,23 @@ internal sealed partial class DatabaseApi : IDatabaseApi
 
     private const string SyncTimeFieldName = "SyncTime";
 
-    private readonly ISqlExecuteNonQuerySupplier sqlApi;
+    private const string DbAuditCreateTableQuery = """
+        IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='_AuditDateTime' and xtype='U')
+            BEGIN
+            CREATE TABLE [_AuditDateTime]( 
+                [EntityName] varchar(100) NOT NULL,
+                [AuditDateTime] datetime NOT NULL,
+                [CreatedAt] datetimeoffset DEFAULT SYSDATETIMEOFFSET() NOT NULL,
+                PRIMARY KEY (EntityName)
+            );
+            END
+        """;
+
+    private readonly ISqlExecuteNonQuerySupplier sqlExecuteNonQueryApi;
 
     private readonly IDateTimeOffsetProvider dateTimeOffsetProvider;
 
-    internal DatabaseApi(ISqlExecuteNonQuerySupplier sqlApi, IDateTimeOffsetProvider dateTimeOffsetProvider)
+    internal DatabaseApi(ISqlExecuteNonQuerySupplier sqlExecuteNonQueryApi, IDateTimeOffsetProvider dateTimeOffsetProvider)
         =>
-        (this.sqlApi, this.dateTimeOffsetProvider) = (sqlApi, dateTimeOffsetProvider);
+        (this.sqlExecuteNonQueryApi, this.dateTimeOffsetProvider) = (sqlExecuteNonQueryApi, dateTimeOffsetProvider);
 }
