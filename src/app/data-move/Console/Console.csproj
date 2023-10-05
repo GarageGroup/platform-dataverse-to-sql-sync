@@ -23,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.11.2" />
+    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.12.0" />
+    <PackageReference Include="GarageGroup.Infra.Dataverse.Api.Identity.Azure" Version="0.0.1" />
     <PackageReference Include="GarageGroup.Infra.Handler.Console" Version="0.5.0" />
     <PackageReference Include="GarageGroup.Infra.Http.Polly" Version="1.1.0" />
     <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="1.5.1" />
