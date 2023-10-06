@@ -10,8 +10,6 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class EntityMoveFunc : IEntityMoveFunc
 {
-    private const int MaxDbBatchSize = 128;
-
     private const int DefaultDbBatchCount = 15;
 
     private const int DefaultDbBatchTimeoutMilliseconds = 7000;
@@ -45,10 +43,8 @@ internal sealed partial class EntityMoveFunc : IEntityMoveFunc
         GetBatchSize(fieldCount) * GetMaxDbBatchCount();
 
     private static int GetBatchSize(int fieldCount)
-    {
-        var batchSize = MaxSqlParametersCount / (fieldCount + 1);
-        return batchSize < MaxDbBatchSize ? batchSize : MaxDbBatchSize;
-    }
+        =>
+        MaxSqlParametersCount / (fieldCount + 1);
 
     private int GetMaxDbBatchCount()
         =>
