@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -19,7 +21,7 @@ jobs:
 
       - name: Add Garage Group NuGet Source
         run: >
-          dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+          dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
           -n garage
           -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
           -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
@@ -33,7 +35,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -41,7 +45,7 @@ jobs:
 
       - name: Add Garage Group NuGet Source
         run: >
-          dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+          dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
           -n garage
           -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
           -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
@@ -79,8 +83,8 @@ jobs:
           cd ./buildConsole
           zip -r garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./
 
-
-      - uses: azure/login@v1
+      - name: Azure Login
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS_ARTIFACT }}
 
@@ -103,13 +107,20 @@ jobs:
         env:
           AZURE_STORAGE_ACCOUNT: startifactblob
 
+      - name: Azure Logout
+        uses: azure/CLI@v1
+        with:
+          inlineScript: az logout
+
   publish-latest:
     if: github.event.release.prerelease == false
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -117,7 +128,7 @@ jobs:
 
       - name: Add Garage Group NuGet Source
         run: >
-          dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+          dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
           -n garage
           -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
           -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
@@ -151,11 +162,10 @@ jobs:
           cd ./buildConsole
           zip -r garage-platform-dataverse-to-sql-console-app-latest.zip ./
 
-
-      - uses: azure/login@v1
+      - name: Azure Login
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS_ARTIFACT }}
-
       - name: Upload to Azure Blob Storage
         uses: azure/CLI@v1
         with:
@@ -174,3 +184,8 @@ jobs:
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
           AZURE_STORAGE_ACCOUNT: startifactblob
+
+      - name: Azure Logout
+        uses: azure/CLI@v1
+        with:
+          inlineScript: az logout

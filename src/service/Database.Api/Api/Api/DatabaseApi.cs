@@ -4,7 +4,7 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class DatabaseApi : IDatabaseApi
 {
-    private const int DefaultTimeoutInSeconds = 120;
+    private const int DefaultTimeoutInSeconds = 300;
 
     private const string PrimaryKeyFieldName = "CrmId";
 

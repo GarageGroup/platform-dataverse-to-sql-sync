@@ -51,7 +51,7 @@ partial class DatabaseApiTestSource
                                     new("id", "856", "id0"),
                                     new("listingId", "1", "listingId0"))))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -92,7 +92,7 @@ partial class DatabaseApiTestSource
                                     new("name", "golden plaza", "name0"),
                                     new("id", "856", "id0"))))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -120,7 +120,7 @@ partial class DatabaseApiTestSource
                             new DbParameterFilter(
                                 "id", DbFilterOperator.Equal, Guid.Parse("00f1096e-a3f3-44dd-89e0-e3acae0e9f3e"), "id0"))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -148,7 +148,7 @@ partial class DatabaseApiTestSource
                             new DbParameterFilter(
                                 "id", DbFilterOperator.Equal, Guid.Parse("00f1096e-a3f3-44dd-89e0-e3acae0e9f3e"), "id0"))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -189,7 +189,7 @@ partial class DatabaseApiTestSource
                             new DbParameterFilter(
                                 "id", DbFilterOperator.Equal, Guid.Parse("c4782fb7-496c-44b1-82fa-78aaefb21dc8"), "id1"))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -256,7 +256,7 @@ partial class DatabaseApiTestSource
                                     new("name", "Big ben", "name1"),
                                     new("id", "12", "id1"))))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -285,7 +285,7 @@ partial class DatabaseApiTestSource
                             new DbParameterFilter(
                                 "id", DbFilterOperator.Equal, Guid.Parse("c70fba50-d08b-4ccf-9fa8-129dcbfe4037"), "id0"))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
         };

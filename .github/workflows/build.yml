@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -16,17 +18,17 @@ jobs:
 
     - name: Add Garage Group NuGet Source
       run: >
-        dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }}
+        dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
         -n garage
         -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
-    - name: Restore Platform.DataverseToSqlSync.sln
+    - name: Restore
       run: dotnet restore
 
-    - name: Build Platform.DataverseToSqlSync.sln
+    - name: Build
       run: dotnet build --no-restore  -c Release
 
-    - name: Test Platform.DataverseToSqlSync.sln
+    - name: Test
       run: dotnet test

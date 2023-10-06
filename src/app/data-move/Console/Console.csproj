@@ -27,8 +27,8 @@
     <PackageReference Include="GarageGroup.Infra.Dataverse.Api.Identity.Azure" Version="0.0.1" />
     <PackageReference Include="GarageGroup.Infra.Handler.Console" Version="0.5.0" />
     <PackageReference Include="GarageGroup.Infra.Http.Polly" Version="1.1.0" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="1.5.1" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api.Provider.Microsoft" Version="1.0.1" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="1.5.2" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api.Provider.Microsoft" Version="1.0.2" />
     <PackageReference Include="PrimeFuncPack.Primitives.Pipeline" Version="2.0.2" />
   </ItemGroup>
 

@@ -19,7 +19,7 @@ partial class DatabaseApiTestSource
                     filter: new DbParameterFilter(
                         "SyncTime", DbFilterOperator.Less, new DateTimeOffset(2021, 05, 07, 12, 10, 51, TimeSpan.FromHours(-1))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -31,7 +31,7 @@ partial class DatabaseApiTestSource
                     filter: new DbParameterFilter(
                         "SyncTime", DbFilterOperator.Less, new DateTimeOffset(2023, 01, 31, 05, 00, 43, TimeSpan.FromHours(5))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             },
             new object[]
@@ -48,7 +48,7 @@ partial class DatabaseApiTestSource
                             new DbParameterFilter(
                                 "SyncTime", DbFilterOperator.Less, new DateTimeOffset(2017, 10, 21, 15, 45, 01, default)))))
                 {
-                    TimeoutInSeconds = 120
+                    TimeoutInSeconds = 300
                 }
             }
         };
