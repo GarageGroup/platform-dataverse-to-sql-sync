@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>GarageGroup.Platform.DataverseToSqlSync.Test</RootNamespace>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.RuleSet.Get.Test</AssemblyName>
   </PropertyGroup>
 

@@ -12,12 +12,17 @@ partial class CrmEntityFlowGetFuncTest
     [Fact]
     public static async Task InvokeAsync_CrmEntityFlowGetInIsNull_ExpectThrowsArgumentNullException()
     {
-        var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(SomeDataverseEntitySetGetOut);
+        var mockDataverseApi = CreateMockDataverseApi(SomeDataverseEntitySetGetOut);
 
-        var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
+        var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
         var cancellationToken = new CancellationToken(canceled: true);
 
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await IterateOverAsyncEnumerableAsync(func, null!, cancellationToken));
+        var ex = await Assert.ThrowsAsync<ArgumentNullException>(TestAsync);
+        Assert.Equal("input", ex.ParamName);
+
+        async Task TestAsync()
+            =>
+            _ = await IterateOverAsyncEnumerableAsync(func, null!, cancellationToken);
     }
 
     [Fact]
@@ -29,23 +34,54 @@ partial class CrmEntityFlowGetFuncTest
                 {
                     ExtensionData = new()
                 }));
-        var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(dataverseEntitySetGetOut);
 
-        var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
+        var mockDataverseApi = CreateMockDataverseApi(dataverseEntitySetGetOut);
+
+        var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
         var cancellationToken = new CancellationToken(canceled: true);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken));
+        _ = await Assert.ThrowsAsync<InvalidOperationException>(TestAsync);
+
+        async Task TestAsync()
+            =>
+            _ = await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken);
     }
 
     [Fact]
     public static async Task InvokeAsync_DataverseFailure_ExpectThrowsInvalidOperationException()
     {
-        var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(Failure.Create(DataverseFailureCode.Unknown, "Unknown error"));
+        var failure = Failure.Create(DataverseFailureCode.Unknown, "Unknown error");
+        var mockDataverseApi = CreateMockDataverseApi(failure);
 
-        var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
+        var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
         var cancellationToken = new CancellationToken(canceled: true);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken));
+        await Assert.ThrowsAsync<InvalidOperationException>(TestAsync);
+
+        async Task TestAsync()
+            =>
+            _ = await IterateOverAsyncEnumerableAsync(func, SomeCrmEntityFlowGetIn, cancellationToken);
+    }
+
+    [Theory]
+    [MemberData(nameof(CrmEntityFlowGetFuncSource.DataverseInputTestData), MemberType = typeof(CrmEntityFlowGetFuncSource))]
+    internal static async Task InvokeAsync_CancellationTokenIsNotCanceled_ExpectDataverseEntitySetGetFunctionCall(
+        CrmEntityFlowGetIn input,
+        FlatArray<DataverseEntitySetGetOut<CrmEntityJson>> dataverseEntitySetGetOutSet,
+        FlatArray<DataverseEntitySetGetIn> dataverseEntitySetGetInSet)
+    {
+        var mockDataverseApi = CreateMockDataverseApi(dataverseEntitySetGetOutSet);
+        var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
+        var cancellationToken = new CancellationToken(canceled: false);
+
+        _ = await IterateOverAsyncEnumerableAsync(func, input, cancellationToken);
+
+        foreach (var dataverseEntitySetGetIn in dataverseEntitySetGetInSet)
+        {
+            mockDataverseApi.Verify(
+                func => func.GetEntitySetAsync<CrmEntityJson>(dataverseEntitySetGetIn, cancellationToken),
+                Times.Once);
+        }
     }
 
     [Theory]
@@ -53,30 +89,13 @@ partial class CrmEntityFlowGetFuncTest
     internal static async Task InvokeAsync_CancellationTokenIsNotCanceled_ExpectCorrectOut(
         CrmEntityFlowGetIn input, DataverseEntitySetGetOut<CrmEntityJson> dataverseEntitySetGetOut, FlatArray<CrmEntitySet> expected)
     {
-        var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(dataverseEntitySetGetOut);
+        var mockDataverseApi = CreateMockDataverseApi(dataverseEntitySetGetOut);
 
-        var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
+        var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
         var cancellationToken = new CancellationToken(canceled: false);
 
         var actual = await IterateOverAsyncEnumerableAsync(func, input, cancellationToken);
 
         Assert.True(CompareCrmEntitySets(expected, actual));
-    }
-
-    [Theory]
-    [MemberData(nameof(CrmEntityFlowGetFuncSource.DataverseInputTestData), MemberType = typeof(CrmEntityFlowGetFuncSource))]
-    internal static async Task InvokeAsync_CancellationTokenIsNotCanceled_ExpectDataverseEntitySetGetFunctionCall(
-        CrmEntityFlowGetIn input, FlatArray<DataverseEntitySetGetOut<CrmEntityJson>> dataverseEntitySetGetOutSet, FlatArray<DataverseEntitySetGetIn> dataverseEntitySetGetInSet)
-    {
-        var mockDataverseEntitySetGetSupplier = CreateMockDataverseEntitySetGetSupplier(dataverseEntitySetGetOutSet);
-        var func = new CrmEntityFlowGetFunc(mockDataverseEntitySetGetSupplier.Object);
-        var cancellationToken = new CancellationToken(canceled: false);
-
-        var _ = await IterateOverAsyncEnumerableAsync(func, input, cancellationToken);
-
-        foreach (var dataverseEntitySetGetIn in dataverseEntitySetGetInSet)
-        {
-            mockDataverseEntitySetGetSupplier.Verify(func => func.GetEntitySetAsync<CrmEntityJson>(dataverseEntitySetGetIn, cancellationToken), Times.Once);
-        }
     }
 }

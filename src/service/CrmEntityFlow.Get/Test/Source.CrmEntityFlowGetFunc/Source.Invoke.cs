@@ -22,6 +22,21 @@ partial class CrmEntityFlowGetFuncSource
                     pageSize: 20,
                     includeAnnotations: null),
                 new DataverseEntitySetGetOut<CrmEntityJson>(
+                    value: default,
+                    nextLink: null),
+                default(FlatArray<CrmEntitySet>)
+            },
+            new object[]
+            {
+                new CrmEntityFlowGetIn(
+                    entityName: "sl_unit",
+                    pluralName: "sl_units",
+                    fields: new("sl_name", "sl_description", "sl_dishwasherbit"),
+                    lookups: new(),
+                    filter: null,
+                    pageSize: 20,
+                    includeAnnotations: null),
+                new DataverseEntitySetGetOut<CrmEntityJson>(
                     value: new(
                         new CrmEntityJson
                         {
