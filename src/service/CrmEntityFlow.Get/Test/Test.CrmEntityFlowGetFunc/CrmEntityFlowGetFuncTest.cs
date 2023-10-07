@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 public static partial class CrmEntityFlowGetFuncTest
 {
-    internal static DataverseEntitySetGetOut<CrmEntityJson> SomeDataverseEntitySetGetOut
+    private static DataverseEntitySetGetOut<CrmEntityJson> SomeDataverseEntitySetGetOut
         =>
         new(
             value: new(
@@ -27,7 +26,7 @@ public static partial class CrmEntityFlowGetFuncTest
                     }
                 }));
 
-    internal static CrmEntityFlowGetIn SomeCrmEntityFlowGetIn
+    private static CrmEntityFlowGetIn SomeCrmEntityFlowGetIn
         =>
         new(
             entityName: "sl_picture",
@@ -38,7 +37,7 @@ public static partial class CrmEntityFlowGetFuncTest
             pageSize: 20,
             includeAnnotations: null);
 
-    internal static Mock<IDataverseEntitySetGetSupplier> CreateMockDataverseEntitySetGetSupplier(
+    private static Mock<IDataverseEntitySetGetSupplier> CreateMockDataverseApi(
         Result<DataverseEntitySetGetOut<CrmEntityJson>, Failure<DataverseFailureCode>> dataverseEntitySetGetOut)
     {
         var mock = new Mock<IDataverseEntitySetGetSupplier>();
@@ -51,7 +50,7 @@ public static partial class CrmEntityFlowGetFuncTest
         return mock;
     }
 
-    internal static Mock<IDataverseEntitySetGetSupplier> CreateMockDataverseEntitySetGetSupplier(
+    private static Mock<IDataverseEntitySetGetSupplier> CreateMockDataverseApi(
         DataverseEntitySetGetOut<CrmEntityJson>[] dataverseEntitySetGetOut)
     {
         var queue = new Queue<DataverseEntitySetGetOut<CrmEntityJson>>(dataverseEntitySetGetOut);
@@ -64,7 +63,7 @@ public static partial class CrmEntityFlowGetFuncTest
         return mock;
     }
 
-    internal static async Task<FlatArray<CrmEntitySet>> IterateOverAsyncEnumerableAsync(
+    private static async Task<FlatArray<CrmEntitySet>> IterateOverAsyncEnumerableAsync(
         CrmEntityFlowGetFunc func, CrmEntityFlowGetIn input, CancellationToken cancellationToken)
     {
         var crmEntities = new List<CrmEntitySet>();
@@ -76,7 +75,7 @@ public static partial class CrmEntityFlowGetFuncTest
         return crmEntities;
     }
 
-    internal static bool CompareCrmEntitySets(FlatArray<CrmEntitySet> first, FlatArray<CrmEntitySet> second)
+    private static bool CompareCrmEntitySets(FlatArray<CrmEntitySet> first, FlatArray<CrmEntitySet> second)
     {
         if (first.Length != second.Length)
         {

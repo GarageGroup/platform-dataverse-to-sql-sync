@@ -30,7 +30,10 @@ partial class CrmEntityFlowGetFunc
 
         while (true)
         {
-            yield return new(response.Value.Map(MapEntityJson));
+            if (response.Value.IsNotEmpty)
+            {
+                yield return new(response.Value.Map(MapEntityJson));
+            }
 
             if (string.IsNullOrEmpty(response.NextLink))
             {

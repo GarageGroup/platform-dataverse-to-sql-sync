@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="host.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="local.settings.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Api\Api.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Sync\Contract.Sync.csproj" />
     <ProjectReference Include="..\..\..\data-mover-api\DataMover.Api\Contract.Move\Contract.Move.csproj" />
@@ -18,10 +23,6 @@
     <ProjectReference Include="..\..\..\service\RuleSet.Get\Func\Func.csproj" />
     <ProjectReference Include="..\..\..\service\RuleSet.Get\Contract\Contract.csproj" />
     <ProjectReference Include="..\Handler\Handler.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="host.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
