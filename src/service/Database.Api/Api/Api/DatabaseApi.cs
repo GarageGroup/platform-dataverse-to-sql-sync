@@ -10,10 +10,12 @@ internal sealed partial class DatabaseApi : IDatabaseApi
 
     private const string SyncTimeFieldName = "SyncTime";
 
-    private const string DbAuditCreateTableQuery = """
-        IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='_AuditDateTime' and xtype='U')
+    private const string AuditDateTimeTableName = "_AuditDateTime";
+
+    private const string DbAuditCreateTableQuery = $"""
+        IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='{AuditDateTimeTableName}' and xtype='U')
             BEGIN
-            CREATE TABLE [_AuditDateTime]( 
+            CREATE TABLE [{AuditDateTimeTableName}]( 
                 [EntityName] varchar(100) NOT NULL,
                 [AuditDateTime] datetime NOT NULL,
                 [CreatedAt] datetimeoffset DEFAULT SYSDATETIMEOFFSET() NOT NULL,
