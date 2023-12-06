@@ -2,7 +2,7 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-internal sealed partial class DatabaseApi : IDatabaseApi
+internal sealed partial class DatabaseApi(ISqlExecuteNonQuerySupplier sqlApi, IDateTimeOffsetProvider dateTimeOffsetProvider) : IDatabaseApi
 {
     private const int DefaultTimeoutInSeconds = 300;
 
@@ -12,23 +12,20 @@ internal sealed partial class DatabaseApi : IDatabaseApi
 
     private const string AuditDateTimeTableName = "_AuditDateTime";
 
-    private const string DbAuditCreateTableQuery = $"""
-        IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='{AuditDateTimeTableName}' and xtype='U')
-            BEGIN
-            CREATE TABLE [{AuditDateTimeTableName}]( 
-                [EntityName] varchar(100) NOT NULL,
-                [AuditDateTime] datetime NOT NULL,
-                [CreatedAt] datetimeoffset DEFAULT SYSDATETIMEOFFSET() NOT NULL,
-                PRIMARY KEY (EntityName)
-            );
-            END
-        """;
+    private static readonly DbQuery DbAuditCreateTableQuery;
 
-    private readonly ISqlExecuteNonQuerySupplier sqlExecuteNonQueryApi;
-
-    private readonly IDateTimeOffsetProvider dateTimeOffsetProvider;
-
-    internal DatabaseApi(ISqlExecuteNonQuerySupplier sqlExecuteNonQueryApi, IDateTimeOffsetProvider dateTimeOffsetProvider)
+    static DatabaseApi()
         =>
-        (this.sqlExecuteNonQueryApi, this.dateTimeOffsetProvider) = (sqlExecuteNonQueryApi, dateTimeOffsetProvider);
+        DbAuditCreateTableQuery = new(
+            $"""
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='{AuditDateTimeTableName}' and xtype='U')
+                    BEGIN
+                    CREATE TABLE [{AuditDateTimeTableName}]( 
+                        [EntityName] varchar(100) NOT NULL,
+                        [AuditDateTime] datetime NOT NULL,
+                        [CreatedAt] datetimeoffset DEFAULT SYSDATETIMEOFFSET() NOT NULL,
+                        PRIMARY KEY (EntityName)
+                    );
+                    END
+            """);
 }

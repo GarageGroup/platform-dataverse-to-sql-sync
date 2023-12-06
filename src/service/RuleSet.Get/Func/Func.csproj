@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.RuleSet.Func</AssemblyName>
   </PropertyGroup>
 
@@ -11,11 +11,11 @@
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.3.0" />
-    <PackageReference Include="GarageGroup.Core.Collections.FlatArray.Extensions" Version="1.9.1" />
+    <PackageReference Include="GarageGroup.Core.Collections.FlatArray.Extensions" Version="1.9.2" />
     <PackageReference Include="PrimeFuncPack.Core.Func.Abstractions.Async" Version="2.0.0" />
-    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
-    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />
-    <PackageReference Include="YamlDotNet" Version="13.5.1" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.1.0" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.3" />
+    <PackageReference Include="YamlDotNet" Version="13.7.1" />
   </ItemGroup>
 
 </Project>

@@ -2,11 +2,6 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-internal sealed partial class CrmEntityFlowGetFunc : ICrmEntityFlowGetFunc
+internal sealed partial class CrmEntityFlowGetFunc(IDataverseEntitySetGetSupplier dataverseApi) : ICrmEntityFlowGetFunc
 {
-    private readonly IDataverseEntitySetGetSupplier dataverseApiClient;
-
-    internal CrmEntityFlowGetFunc(IDataverseEntitySetGetSupplier dataverseApiClient)
-        =>
-        this.dataverseApiClient = dataverseApiClient;
 }

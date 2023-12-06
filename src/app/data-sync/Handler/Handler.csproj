@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.Data.Sync.Handler</AssemblyName>
   </PropertyGroup>
 
@@ -11,9 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.3.0" />
-    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.3.0" />
-    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
-    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.5.0" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.1.0" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.3" />
   </ItemGroup>
 
 </Project>

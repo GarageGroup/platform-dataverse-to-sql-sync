@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.CrmEntityFlow.Get.Contract</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PrimeFuncPack.Core.FlatArray" Version="1.2.1" />
+    <PackageReference Include="PrimeFuncPack.Core.FlatArray" Version="1.2.2" />
   </ItemGroup>
 
 </Project>

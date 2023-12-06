@@ -19,11 +19,15 @@ public static partial class DatabaseApiTest
         new(
             tableName: "properties",
             keyFieldName: "CrmId",
-            items: new(
-                new DbDataItem(
-                    Guid.Parse("a90d93fe-ba9e-4deb-93e0-d2b8e52ccc32"),
-                    new(
-                        new DataFieldValue("someName", "someValue")))),
+            items: new DbDataItem[]
+            {
+                new(
+                    crmId: Guid.Parse("a90d93fe-ba9e-4deb-93e0-d2b8e52ccc32"),
+                    fieldValues: new DataFieldValue[]
+                    {
+                        new("someName", "someValue")
+                    })
+            },
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: true);
 

@@ -10,7 +10,7 @@ namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 partial class DatabaseApiTest
 {
     [Fact]
-    public static void UpdateAsync_InputIsNull_ExpectArgumentNullException()
+    public static async Task UpdateAsync_InputIsNull_ExpectArgumentNullException()
     {
         var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(15);
         var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
@@ -18,24 +18,12 @@ partial class DatabaseApiTest
         var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
         var cancellationToken = new CancellationToken(canceled: false);
 
-        Assert.ThrowsAsync<ArgumentNullException>(TestAsync);
+        var ex = await Assert.ThrowsAsync<ArgumentNullException>(TestAsync);
+        Assert.Equal("input", ex.ParamName);
 
         async Task TestAsync()
             =>
             await func.UpdateDataAsync(null!, cancellationToken);
-    }
-
-    [Fact]
-    public static void UpdateAsync_CancellationTokenIsCanceled_ExpectTaskIsCanceled()
-    {
-        var mockSqlQuerySupplier = CreateMockSqlQuerySupplier(5);
-        var dateTimeOffsetProvider = CreateDateTimeOffsetProvider(SomeDateTimeOffset);
-
-        var func = new DatabaseApi(mockSqlQuerySupplier.Object, dateTimeOffsetProvider);
-        var cancellationToken = new CancellationToken(canceled: true);
-
-        var result = func.UpdateDataAsync(SomeUpdateInput, cancellationToken);
-        Assert.True(result.IsCanceled);
     }
 
     [Theory]

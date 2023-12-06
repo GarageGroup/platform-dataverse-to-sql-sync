@@ -7,18 +7,18 @@ using PrimeFuncPack;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-partial class Application
+internal static class Application
 {
-    public static Dependency<IDataMoveHandler> UseDataMoveHandler()
+    public static Dependency<IHandler<Unit, Unit>> UseDataMoveHandler()
         =>
         PrimaryHandler.UseStandardSocketsHttpHandler()
         .UseLogging("DataverseApiClient")
-        .UseDataverseAzureCredentialStandard()
+        .UseTokenCredentialStandard()
         .UsePollyStandard()
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()
         .With(
-            UseSqlApi().UseDatabaseApi())
+            MicrosoftDbProvider.Configure("SqlDb").UseSqlApi().UseDatabaseApi())
         .With(
             Dependency.From(ResolveRuleSetGetOption).UseRuleSetGetFunc())
         .With(
