@@ -1,10 +1,5 @@
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-internal sealed partial class DataSyncHandler : IDataSyncHandler
+internal sealed partial class DataSyncHandler(IDataSyncSupplier dataMoverApi) : IDataSyncHandler
 {
-    private readonly IDataSyncSupplier dataMoverApi;
-
-    internal DataSyncHandler(IDataSyncSupplier dataMoverApi)
-        =>
-        this.dataMoverApi = dataMoverApi;
 }

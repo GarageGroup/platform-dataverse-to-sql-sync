@@ -12,13 +12,12 @@ partial class DatabaseApi
         =>
         AsyncPipeline.Pipe(
             input, cancellationToken)
-        .HandleCancellation()
         .Pipe(
             ValidateInput)
         .MapSuccess(
             CreateAuditDateDbQuery)
         .ForwardValue(
-            sqlExecuteNonQueryApi.ExecuteNonQueryOrFailureAsync)
+            sqlApi.ExecuteNonQueryOrFailureAsync)
         .MapSuccess(
             Unit.From);
 

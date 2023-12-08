@@ -5,7 +5,7 @@ using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
 
-partial class DataMoveHandler
+internal sealed class DataMoveHandler(IDataMoveSupplier dataMoverApi) : IHandler<Unit, Unit>
 {
     public ValueTask<Result<Unit, Failure<HandlerFailureCode>>> HandleAsync(Unit input, CancellationToken cancellationToken)
         =>

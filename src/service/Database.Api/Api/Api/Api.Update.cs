@@ -12,7 +12,6 @@ partial class DatabaseApi
         =>
         AsyncPipeline.Pipe(
             input ?? throw new ArgumentNullException(nameof(input)), cancellationToken)
-        .HandleCancellation()
         .Pipe(
             CreateDbQuery)
         .PipeValue(
@@ -22,7 +21,7 @@ partial class DatabaseApi
 
     private ValueTask<int> ExecuteNonQueryAsync(DbCombinedQuery dbQuery, CancellationToken cancellationToken)
         =>
-        dbQuery.Queries.IsEmpty ? default : sqlExecuteNonQueryApi.ExecuteNonQueryAsync(dbQuery, cancellationToken);
+        dbQuery.Queries.IsEmpty ? default : sqlApi.ExecuteNonQueryAsync(dbQuery, cancellationToken);
 
     private DbCombinedQuery CreateDbQuery(DbDataUpdateIn input)
     {

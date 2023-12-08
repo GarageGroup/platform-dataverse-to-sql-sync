@@ -8,29 +8,35 @@ public static partial class RuleSetGetTest
 {
     private static readonly ConfigurationYaml SomeConfiguration
         =
-        new ConfigurationYaml
+        new()
         {
-            Entities = new FlatArray<EntityYaml>(
-                new EntityYaml
+            Entities =
+            [
+                new()
                 {
                     Name = "sl_picture",
                     Plural = "sl_pictures",
                     Filter = "sl_id ne null",
                     Annotations = "OData.IncludeAnnotations",
-                    Tables = new FlatArray<TableYaml>(
-                        new TableYaml
+                    Tables =
+                    [
+                        new()
                         {
                             Name = "Picture",
                             Key = "Id",
-                            Fields = new FlatArray<FieldYaml>(
-                                new FieldYaml
+                            Fields =
+                            [
+                                new()
                                 {
                                     Sql = "Url",
                                     Crm = "sl_url",
-                                }),
+                                }
+                            ],
                             Operation = "Update"
-                        })
-                })
+                        }
+                    ]
+                }
+            ]
         };
 
     private static readonly RuleSetGetIn SomeRuleSetGetIn

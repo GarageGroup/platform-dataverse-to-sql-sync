@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.InternalApi.Database.Api</AssemblyName>
   </PropertyGroup>
 
@@ -11,10 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="EarlyFuncPack.Core.AsyncPipeline" Version="0.3.0" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api.Abstractions.ExecuteNonQuery" Version="1.2.2" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api.Core.DbQuery.Request" Version="1.4.2" />
-    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
-    <PackageReference Include="PrimeFuncPack.Primitives.Strings" Version="2.0.2" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api.Abstractions.ExecuteNonQuery" Version="2.1.0" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api.Core.DbRequest" Version="2.2.0" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.1.0" />
   </ItemGroup>
 
 </Project>

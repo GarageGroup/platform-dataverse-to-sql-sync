@@ -71,16 +71,8 @@ partial class CrmEntityFlowGetFunc
     {
         while (true)
         {
-            try
-            {
-                var result = await dataverseApiClient.GetEntitySetAsync<CrmEntityJson>(input, cancellationToken).ConfigureAwait(false);
-                return result.SuccessOrThrow(CreateUnsuccessfulResponseException);
-            }
-            catch (TaskCanceledException)
-                when (cancellationToken.IsCancellationRequested is false)
-            {
-                // repeat till token is canceled
-            }
+            var result = await dataverseApi.GetEntitySetAsync<CrmEntityJson>(input, cancellationToken).ConfigureAwait(false);
+            return result.SuccessOrThrow(CreateUnsuccessfulResponseException);
         }
 
         static InvalidOperationException CreateUnsuccessfulResponseException(Failure<DataverseFailureCode> failure)

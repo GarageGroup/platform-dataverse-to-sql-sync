@@ -11,7 +11,6 @@ partial class DatabaseApi
         =>
         AsyncPipeline.Pipe(
             input ?? throw new ArgumentNullException(nameof(input)), cancellationToken)
-        .HandleCancellation()
         .Pipe(
             static @in => new DbDeleteQuery(
                 tableName: @in.TableName,
@@ -20,7 +19,7 @@ partial class DatabaseApi
                 TimeoutInSeconds = DefaultTimeoutInSeconds
             })
         .PipeValue(
-            sqlExecuteNonQueryApi.ExecuteNonQueryAsync)
+            sqlApi.ExecuteNonQueryAsync)
         .Pipe(
             static affectedRows => new DbDataDeleteOut(affectedRows));
 

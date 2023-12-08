@@ -17,7 +17,7 @@ internal static class Application
         =>
         PrimaryHandler.UseStandardSocketsHttpHandler()
         .UseLogging("DataverseApiClient")
-        .UseDataverseAzureCredentialStandard()
+        .UseTokenCredentialStandard()
         .UsePollyStandard()
         .UseDataverseApiClient()
         .UseCrmEntityFlowGetFunc()

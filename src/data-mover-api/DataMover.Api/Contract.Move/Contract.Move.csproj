@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>GarageGroup.Platform.DataverseToSqlSync.DataMoverApi.Contract.Move</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PrimeFuncPack.Core.Unit" Version="2.2.0" />
+    <PackageReference Include="PrimeFuncPack.Core.Unit" Version="2.2.1" />
   </ItemGroup>
 
 </Project>

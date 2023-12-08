@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using GarageGroup.Infra;
 using Microsoft.Extensions.Hosting;
 
 namespace GarageGroup.Platform.DataverseToSqlSync;
@@ -7,8 +8,5 @@ static class Program
 {
     static Task Main()
         =>
-        Host.CreateDefaultBuilder()
-        .ConfigureFunctionsWorkerStandard()
-        .Build()
-        .RunAsync();
+        FunctionHost.CreateFunctionsWorkerBuilderStandard().Build().RunAsync();
 }

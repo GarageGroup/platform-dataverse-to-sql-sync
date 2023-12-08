@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using GarageGroup.Infra;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
@@ -9,15 +8,14 @@ partial class CrmEntityFlowGetFuncSource
 {
     public static IEnumerable<object[]> InputTestData
         =>
-        new[]
+        new object[][]
         {
-            new object[]
-            {
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_unit",
                     pluralName: "sl_units",
                     fields: new("sl_name", "sl_description", "sl_dishwasherbit"),
-                    lookups: new(),
+                    lookups: default,
                     filter: null,
                     pageSize: 20,
                     includeAnnotations: null),
@@ -25,20 +23,20 @@ partial class CrmEntityFlowGetFuncSource
                     value: default,
                     nextLink: null),
                 default(FlatArray<CrmEntitySet>)
-            },
-            new object[]
-            {
+            ],
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_unit",
                     pluralName: "sl_units",
                     fields: new("sl_name", "sl_description", "sl_dishwasherbit"),
-                    lookups: new(),
+                    lookups: default,
                     filter: null,
                     pageSize: 20,
                     includeAnnotations: null),
                 new DataverseEntitySetGetOut<CrmEntityJson>(
-                    value: new(
-                        new CrmEntityJson
+                    value: new CrmEntityJson[]
+                    {
+                        new()
                         {
                             ExtensionData = new()
                             {
@@ -47,33 +45,42 @@ partial class CrmEntityFlowGetFuncSource
                                 { "sl_description", GetJsonElement("Near the sea and so impressive property") },
                                 { "sl_dishwasherbit", GetJsonElement(true) }
                             }
-                        }),
+                        }
+                    },
                     nextLink: null),
-                new FlatArray<CrmEntitySet>(
-                    new CrmEntitySet(
-                        entities: new(
-                            new CrmEntity(
+                new CrmEntitySet[]
+                {
+                    new(
+                        entities: new CrmEntity[]
+                        {
+                            new(
                                 id: Guid.Parse("e4195a96-8689-ec11-93b0-6045bd91d810"),
-                                fieldValues: new(
-                                    new CrmEntityFieldValue("sl_unitid", GetJsonElement("e4195a96-8689-ec11-93b0-6045bd91d810")),
-                                    new CrmEntityFieldValue("sl_name", GetJsonElement("Penthouse 211")),
-                                    new CrmEntityFieldValue("sl_description", GetJsonElement("Near the sea and so impressive property")),
-                                    new CrmEntityFieldValue("sl_dishwasherbit", GetJsonElement(true)))))))
-            },
-            new object[]
-            {
+                                fieldValues: new CrmEntityFieldValue[]
+                                {
+                                    new("sl_unitid", GetJsonElement("e4195a96-8689-ec11-93b0-6045bd91d810")),
+                                    new("sl_name", GetJsonElement("Penthouse 211")),
+                                    new("sl_description", GetJsonElement("Near the sea and so impressive property")),
+                                    new("sl_dishwasherbit", GetJsonElement(true))
+                                })
+                        })
+                }
+            ],
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_project",
                     pluralName: "sl_projects",
                     fields: new("sl_name", "sl_completiondate", "sl_startdate", "sl_picture"),
-                    lookups: new(
-                        new CrmEntityLookup("sl_picture", "sl_pictureid/sl_url")),
+                    lookups: new CrmEntityLookup[]
+                    {
+                        new("sl_picture", "sl_pictureid/sl_url")
+                    },
                     filter: null,
                     pageSize: 20,
                     includeAnnotations: null),
                 new DataverseEntitySetGetOut<CrmEntityJson>(
-                    value: new(
-                        new CrmEntityJson
+                    value: new CrmEntityJson[]
+                    {
+                        new()
                         {
                             ExtensionData = new()
                             {
@@ -84,7 +91,7 @@ partial class CrmEntityFlowGetFuncSource
                                 { "sl_picture", GetJsonElement("https://ilove-unit-testing.io/xunit") }
                             }
                         },
-                        new CrmEntityJson
+                        new()
                         {
                             ExtensionData = new()
                             {
@@ -94,52 +101,63 @@ partial class CrmEntityFlowGetFuncSource
                                 { "sl_startdate", GetJsonElement(new DateTime(2022, 9, 20)) },
                                 { "sl_picture", GetJsonElement("https://test.com") }
                             }
-                        }),
+                        }
+                    },
                     nextLink: null),
-                new FlatArray<CrmEntitySet>(
-                    new CrmEntitySet(
-                        entities: new(
-                            new CrmEntity(
+                new CrmEntitySet[]
+                {
+                    new(
+                        entities: new CrmEntity[]
+                        {
+                            new(
                                 id: Guid.Parse("57372b46-9197-4201-88ab-be3316b5a880"),
-                                fieldValues: new(
-                                    new CrmEntityFieldValue("sl_projectid", GetJsonElement("57372b46-9197-4201-88ab-be3316b5a880")),
-                                    new CrmEntityFieldValue("sl_name", GetJsonElement("Starline Valley")),
-                                    new CrmEntityFieldValue("sl_completiondate", GetJsonElement(new DateTime(2021, 5, 3))),
-                                    new CrmEntityFieldValue("sl_startdate", GetJsonElement(new DateTime(2020, 5, 3))),
-                                    new CrmEntityFieldValue("sl_picture", GetJsonElement("https://ilove-unit-testing.io/xunit")))),
-                            new CrmEntity(
+                                fieldValues: new CrmEntityFieldValue[]
+                                {
+                                    new("sl_projectid", GetJsonElement("57372b46-9197-4201-88ab-be3316b5a880")),
+                                    new("sl_name", GetJsonElement("Starline Valley")),
+                                    new("sl_completiondate", GetJsonElement(new DateTime(2021, 5, 3))),
+                                    new("sl_startdate", GetJsonElement(new DateTime(2020, 5, 3))),
+                                    new("sl_picture", GetJsonElement("https://ilove-unit-testing.io/xunit"))
+                                }),
+                            new(
                                 id: Guid.Parse("ddb3a550-b083-4adb-b2aa-6643e34c726e"),
-                                fieldValues: new(
-                                    new CrmEntityFieldValue("sl_projectid", GetJsonElement("ddb3a550-b083-4adb-b2aa-6643e34c726e")),
-                                    new CrmEntityFieldValue("sl_name", GetJsonElement("Moonline Valley")),
-                                    new CrmEntityFieldValue("sl_completiondate", GetJsonElement(new DateTime(2023, 2, 1))),
-                                    new CrmEntityFieldValue("sl_startdate", GetJsonElement(new DateTime(2022, 9, 20))),
-                                    new CrmEntityFieldValue("sl_picture", GetJsonElement("https://test.com")))))))
-            }
+                                fieldValues: new CrmEntityFieldValue[]
+                                {
+                                    new("sl_projectid", GetJsonElement("ddb3a550-b083-4adb-b2aa-6643e34c726e")),
+                                    new("sl_name", GetJsonElement("Moonline Valley")),
+                                    new("sl_completiondate", GetJsonElement(new DateTime(2023, 2, 1))),
+                                    new("sl_startdate", GetJsonElement(new DateTime(2022, 9, 20))),
+                                    new("sl_picture", GetJsonElement("https://test.com"))
+                                })
+                        })
+                }
+            ]
         };
 
     public static IEnumerable<object[]> DataverseInputTestData
         =>
-        new[]
+        new object [][]
         {
-            new object []
-            {
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_project",
                     pluralName: "sl_projects",
                     fields: new("sl_name", "sl_completiondate", "sl_startdate", "sl_picture"),
-                    lookups: new(
-                        new CrmEntityLookup("sl_picture", "sl_pictureid/sl_url")),
+                    lookups: new CrmEntityLookup[]
+                    {
+                        new("sl_picture", "sl_pictureid/sl_url")
+                    },
                     filter: null,
                     pageSize: 20,
                     includeAnnotations: null),
-
-                new FlatArray<DataverseEntitySetGetOut<CrmEntityJson>>(
-                    new DataverseEntitySetGetOut<CrmEntityJson>(
-                        value: new(
-                            new CrmEntityJson
+                new DataverseEntitySetGetOut<CrmEntityJson>[]
+                {
+                    new(
+                        value: new CrmEntityJson[]
+                        {
+                            new()
                             {
-                                ExtensionData = new Dictionary<string, JsonElement>
+                                ExtensionData = new()
                                 {
                                     { "sl_projectid", GetJsonElement("0ae48926-d064-4a2f-b79b-47f31aea60a3") },
                                     { "sl_name", GetJsonElement("Another project") },
@@ -147,13 +165,15 @@ partial class CrmEntityFlowGetFuncSource
                                     { "sl_startdate", GetJsonElement("03.01.2020") },
                                     { "sl_picture", GetJsonElement("https://bad-pictures.com") },
                                 }
-                            }),
+                            }
+                        },
                         nextLink: "link2"),
-                    new DataverseEntitySetGetOut<CrmEntityJson>(
-                        value: new(
-                            new CrmEntityJson
+                    new(
+                        value: new CrmEntityJson[]
+                        {
+                            new()
                             {
-                                ExtensionData = new Dictionary<string, JsonElement>
+                                ExtensionData = new()
                                 {
                                     { "sl_projectid", GetJsonElement("e68d62ba-4117-4c9a-a610-5e4a92f527bf") },
                                     { "sl_name", GetJsonElement("Test project") },
@@ -161,8 +181,11 @@ partial class CrmEntityFlowGetFuncSource
                                     { "sl_startdate", GetJsonElement("09.02.2022") },
                                     { "sl_picture", GetJsonElement("https://good-pictures.com") },
                                 }
-                            }))),
-                new FlatArray<DataverseEntitySetGetIn>(
+                            }
+                        })
+                },
+                new DataverseEntitySetGetIn[]
+                {
                     new(
                         entityPluralName: "sl_projects",
                         selectFields: new("sl_name", "sl_completiondate", "sl_startdate", "sl_picture"),
@@ -178,10 +201,10 @@ partial class CrmEntityFlowGetFuncSource
                     new(nextLink: "link2")
                     {
                         MaxPageSize = 20,
-                    })
-            },
-            new object []
-            {
+                    }
+                },
+            ],
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_unit",
                     pluralName: "sl_units",
@@ -190,20 +213,24 @@ partial class CrmEntityFlowGetFuncSource
                     filter: "sl_id ne null",
                     pageSize: 10,
                     includeAnnotations: "OData annotations"),
-
-                new FlatArray<DataverseEntitySetGetOut<CrmEntityJson>>(
-                    new DataverseEntitySetGetOut<CrmEntityJson>(
-                        value: new(
-                            new CrmEntityJson
+                new DataverseEntitySetGetOut<CrmEntityJson>[]
+                {
+                    new(
+                        value: new CrmEntityJson[]
+                        {
+                            new()
                             {
-                                ExtensionData = new Dictionary<string, JsonElement>
+                                ExtensionData = new()
                                 {
                                     { "sl_unitid", GetJsonElement("b3b0c919-26cd-4b76-b71f-de9d2796aafb") },
                                     { "sl_name", GetJsonElement("Property") }
                                 }
-                            }))),
-                new FlatArray<DataverseEntitySetGetIn>(
-                    new DataverseEntitySetGetIn(
+                            }
+                        })
+                },
+                new DataverseEntitySetGetIn[]
+                {
+                    new(
                         entityPluralName: "sl_units",
                         selectFields: new("sl_name"),
                         expandFields: default,
@@ -211,44 +238,53 @@ partial class CrmEntityFlowGetFuncSource
                     {
                         MaxPageSize = 10,
                         IncludeAnnotations = "OData annotations",
-                    })
-            },
-            new object []
-            {
+                    }
+                }
+            ],
+            [
                 new CrmEntityFlowGetIn(
                     entityName: "sl_unit",
                     pluralName: "sl_units",
                     fields: new("sl_name", "sl_name", "sl_description", "sl_name"),
-                    lookups: new(
+                    lookups: new CrmEntityLookup[]
+                    {
                         new("sl_project", "sl_name"),
                         new("sl_project", "sl_name"),
-                        new("sl_project", "sl_description")),
+                        new("sl_project", "sl_description")
+                    },
                     filter: string.Empty,
                     pageSize: 10,
                     includeAnnotations: null),
-
-                new FlatArray<DataverseEntitySetGetOut<CrmEntityJson>>(
-                    new DataverseEntitySetGetOut<CrmEntityJson>(
-                        value: new(
-                            new CrmEntityJson
+                new DataverseEntitySetGetOut<CrmEntityJson>[]
+                {
+                    new(
+                        value: new CrmEntityJson[]
+                        {
+                            new()
                             {
-                                ExtensionData = new Dictionary<string, JsonElement>
+                                ExtensionData = new()
                                 {
                                     { "sl_unitid", GetJsonElement("19e22188-c884-11ed-afa1-0242ac120002") },
                                     { "sl_name", GetJsonElement("Project name") },
                                     { "sl_description", GetJsonElement("Project description") }
                                 }
-                            }))),
-                new FlatArray<DataverseEntitySetGetIn>(
-                    new DataverseEntitySetGetIn(
+                            }
+                        })
+                },
+                new DataverseEntitySetGetIn[]
+                {
+                    new(
                         entityPluralName: "sl_units",
                         selectFields: new("sl_name", "sl_description"),
-                        expandFields: new(
-                            new DataverseExpandedField("sl_project", new("sl_name", "sl_description"))),
+                        expandFields: new DataverseExpandedField[]
+                        {
+                            new("sl_project", new("sl_name", "sl_description"))
+                        },
                         filter: string.Empty)
                     {
                         MaxPageSize = 10,
-                    })
-            }
+                    }
+                }
+            ]
         };
 }

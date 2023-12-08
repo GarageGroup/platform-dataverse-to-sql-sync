@@ -7,579 +7,699 @@ partial class RuleSetGetTestSource
 {
     public static IEnumerable<object[]> InputTestData
         =>
-        new[]
+        new object[][]
         {
-            new object[]
-            {
+            [
                 new RuleSetGetOption("./configuration.yaml", default),
                 new ConfigurationYaml(),
                 new RuleSetGetIn(string.Empty, false),
                 new RuleSetGetOut(default),
-            },
-            new object[]
-            {
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", default),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures",
                             Filter = "sl_id ne null",
                             Annotations = "OData.IncludeAnnotations",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
                                     Key = "Id",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Update"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(string.Empty, false),
                 new RuleSetGetOut(default),
-            },
-            new object[]
-            {
+            ],
+            [
                 new RuleSetGetOption(
                     "./configuration.yaml",
-                    new("sl_pictures", "sl_unit")
-                ),
+                    new("sl_pictures", "sl_unit")),
                 new ConfigurationYaml(),
                 new RuleSetGetIn(string.Empty, false),
                 new RuleSetGetOut(),
-            },
-            new object[]
-            {
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures",
                             Filter = "sl_id ne null",
                             Annotations = "OData.IncludeAnnotations",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
                                     Key = "CrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Sync"
-                                })
+                                }
+                            ]
                         },
-                        new EntityYaml
+                        new()
                         {
                             Name = "sl_unit",
                             Plural = "sl_units",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Property",
                                     Key = "CrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Name",
                                             Crm = "sl_name",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new(
-                                    new RuleCrmField("sl_url"),
-                                    new RuleCrmField("sl_pictureid"),
-                                    new RuleCrmField("createdon"),
-                                    new RuleCrmField("modifiedon")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_url"),
+                                    new("sl_pictureid"),
+                                    new("createdon"),
+                                    new("modifiedon")
+                                },
                                 filter: "sl_id ne null",
-                                includeAnnotations: "OData.IncludeAnnotations"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "OData.IncludeAnnotations"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Sync,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_pictureid"),
                                             sqlName: "CrmId",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: true),
-                                        new RuleField(
+                                        new(
                                             crmField: new("createdon"),
                                             sqlName: "CrmCreationTime",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("modifiedon"),
                                             sqlName: "CrmModifiedTime",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))),
-                        new RuleEntity(
+                                            skipNullable: false)
+                                    })
+                            }),
+                        new(
                             crmData: new(
                                 entityName: "sl_unit",
                                 entityPluralName: "sl_units",
                                 entityKeyFieldName: "sl_unitid",
-                                fields: new(
-                                    new RuleCrmField("sl_name")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Property",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_unit  \n\n",
                             Plural = "sl_units",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Property",
                                     Key = "CrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Name",
                                             Crm = "sl_name",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_unit",
                                 entityPluralName: "sl_units",
                                 entityKeyFieldName: "sl_unitid",
-                                fields: new(
-                                    new RuleCrmField("sl_name")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name")
+                                },
                                 filter: null,
                                 includeAnnotations: null
                             ),
-                            tables: new(
-                                new RuleTable(
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Property",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures",
                             Filter = "sl_id ne null \n\n   \n",
                             Annotations = "OData.IncludeAnnotations    \n\n",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
                                     Key = "CrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Sync"
                                 },
-                                new TableYaml
+                                new()
                                 {
                                     Name = "Listing",
                                     Key = "PropertyCrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Price",
                                             Crm = "sl_price",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(string.Empty, true),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new(
-                                    new RuleCrmField("sl_url"),
-                                    new RuleCrmField("sl_pictureid"),
-                                    new RuleCrmField("createdon"),
-                                    new RuleCrmField("modifiedon")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_url"),
+                                    new("sl_pictureid"),
+                                    new("createdon"),
+                                    new("modifiedon")
+                                },
                                 filter: "sl_id ne null",
-                                includeAnnotations: "OData.IncludeAnnotations"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "OData.IncludeAnnotations"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Sync,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_pictureid"),
                                             sqlName: "CrmId",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: true),
-                                        new RuleField(
+                                        new(
                                             crmField: new("createdon"),
                                             sqlName: "CrmCreationTime",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("modifiedon"),
                                             sqlName: "CrmModifiedTime",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures \n    ",
                             Filter = "sl_id ne null",
                             Annotations = "OData.IncludeAnnotations",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
+                                }
+                            ]
                         },
-                        new EntityYaml
+                        new()
                         {
                             Name = "sl_listing",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Listing",
                                     Key = "AnotherCrmId",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Price",
                                             Crm = "sl_price",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new(
-                                    new RuleCrmField("sl_url")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_url")
+                                },
                                 filter: "sl_id ne null",
-                                includeAnnotations: "OData.IncludeAnnotations"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "OData.IncludeAnnotations"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))),
-                        new RuleEntity(
+                                            skipNullable: false)
+                                    })
+                            }),
+                        new(
                             crmData: new(
                                 entityName: "sl_listing",
                                 entityPluralName: "sl_listings",
                                 entityKeyFieldName: "sl_listingid",
-                                fields: new(
-                                    new RuleCrmField("sl_price")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_price")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Listing",
                                     keyFieldName: "AnotherCrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_price"),
                                             sqlName: "Price",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
+                                }
+                            ]
                         },
-                        new EntityYaml
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Name",
                                             Crm = "sl_name",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn("sl_area", false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_name")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("sl_area", "sl_picture")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_picture",
                             Plural = "sl_pictures",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Picture",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Url",
                                             Crm = "sl_url",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
+                                }
+                            ]
                         },
-                        new EntityYaml
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Name",
                                             Crm = "sl_name",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
+                                }
+                            ]
                         },
-                        new EntityYaml
+                        new()
                         {
                             Name = "sl_city",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "City",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Sql = "Name",
                                             Crm = "sl_name",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join"
-                                })
-                        })
+                                }
+                            ]
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new(
-                                    new RuleCrmField("sl_url")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_url")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))),
-                        new RuleEntity(
+                                            skipNullable: false)
+                                    })
+                            }),
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_name")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Type = "String",
                                             LookupName = "sl_country \n\n ",
@@ -592,57 +712,65 @@ partial class RuleSetGetTestSource
                                             },
                                             SkipNullable = true,
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "LowerString",
                                             Sql = "LowerCaseName",
                                             Crm = "sl_lowername",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Int32",
                                             Sql = "CityCount",
                                             Crm = "sl_citycount",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Decimal",
                                             Sql = "CityCapitalization",
                                             Crm = "sl_capitalization",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Boolean",
                                             Sql = "IsCapital",
                                             Crm = "sl_capitalbit",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join",
-                                }),
-                        })
+                                }
+                            ],
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_name", "sl_country"),
-                                    new RuleCrmField("sl_lowername"),
-                                    new RuleCrmField("sl_citycount"),
-                                    new RuleCrmField("sl_capitalization"),
-                                    new RuleCrmField("sl_capitalbit")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name", "sl_country"),
+                                    new("sl_lowername"),
+                                    new("sl_citycount"),
+                                    new("sl_capitalization"),
+                                    new("sl_capitalbit")
+                                },
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: null),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name", "sl_country"),
                                             sqlName: "Name",
                                             type: RuleFieldType.String,
@@ -650,47 +778,52 @@ partial class RuleSetGetTestSource
                                                 new KeyValuePair<string, string?>("000211", "1"),
                                                 new KeyValuePair<string, string?>("000212", "2")),
                                             skipNullable: true),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_lowername"),
                                             sqlName: "LowerCaseName",
                                             type: RuleFieldType.LowerString,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_citycount"),
                                             sqlName: "CityCount",
                                             type: RuleFieldType.Int32,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalization"),
                                             sqlName: "CityCapitalization",
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalbit"),
                                             sqlName: "IsCapital",
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Type = "String",
                                             LookupName = "sl_country@ForamtedValue \n\n ",
@@ -703,105 +836,120 @@ partial class RuleSetGetTestSource
                                             },
                                             SkipNullable = true,
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "LowerString",
                                             Sql = "LowerCaseName",
                                             Crm = "sl_lowername@Entry.*",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Int32",
                                             Sql = "CityCount",
                                             Crm = "sl_citycount",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Decimal",
                                             Sql = "CityCapitalization",
                                             Crm = "sl_capitalization@ForamtedValue",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Boolean",
                                             Sql = "IsCapital",
                                             Crm = "sl_capitalbit@Entry.*",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join",
-                                }),
-                        })
+                                }
+                            ],
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_name", "sl_country@ForamtedValue"),
-                                    new RuleCrmField("sl_lowername@Entry.*"),
-                                    new RuleCrmField("sl_citycount"),
-                                    new RuleCrmField("sl_capitalization@ForamtedValue"),
-                                    new RuleCrmField("sl_capitalbit@Entry.*")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name", "sl_country@ForamtedValue"),
+                                    new("sl_lowername@Entry.*"),
+                                    new("sl_citycount"),
+                                    new("sl_capitalization@ForamtedValue"),
+                                    new("sl_capitalbit@Entry.*")
+                                },
                                 filter: null,
-                                includeAnnotations: "ForamtedValue,Entry.*"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "ForamtedValue,Entry.*"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name", "sl_country@ForamtedValue"),
                                             sqlName: "Name",
                                             type: RuleFieldType.String,
-                                            matcherRule: new(
-                                                new KeyValuePair<string, string?>("000211", "1"),
-                                                new KeyValuePair<string, string?>("000212", "2")),
+                                            matcherRule: new KeyValuePair<string, string?>[]
+                                            {
+                                                new("000211", "1"),
+                                                new("000212", "2")
+                                            },
                                             skipNullable: true),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_lowername@Entry.*"),
                                             sqlName: "LowerCaseName",
                                             type: RuleFieldType.LowerString,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_citycount"),
                                             sqlName: "CityCount",
                                             type: RuleFieldType.Int32,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalization@ForamtedValue"),
                                             sqlName: "CityCapitalization",
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalbit@Entry.*"),
                                             sqlName: "IsCapital",
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Type = "String",
                                             LookupName = "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty \n\n ",
@@ -814,217 +962,270 @@ partial class RuleSetGetTestSource
                                             },
                                             SkipNullable = true,
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "LowerString",
                                             Sql = "LowerCaseName",
                                             Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Int32",
                                             Sql = "CityCount",
                                             Crm = "sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Decimal",
                                             Sql = "CityCapitalization",
                                             Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Boolean",
                                             Sql = "IsCapital",
                                             Crm = "sl_capitalbit",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join",
-                                }),
-                        })
+                                }
+                            ],
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
-                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
-                                    new RuleCrmField("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
-                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
-                                    new RuleCrmField("sl_capitalbit")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                    new("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
+                                    new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                    new("sl_capitalbit")
+                                },
                                 filter: null,
-                                includeAnnotations: "Microsoft.Dynamics.CRM.associatednavigationproperty,Microsoft.Dynamics.CRM.lookuplogicalname,OData.Community.Display.V1.FormattedValue"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "Microsoft.Dynamics.CRM.associatednavigationproperty,Microsoft.Dynamics.CRM.lookuplogicalname," +
+                                                    "OData.Community.Display.V1.FormattedValue"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
+                                    fields: new RuleField[]
+                                    {
+                                        new(
                                             crmField: new("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                             sqlName: "Name",
                                             type: RuleFieldType.String,
-                                            matcherRule: new(
-                                                new KeyValuePair<string, string?>("000211", "1"),
-                                                new KeyValuePair<string, string?>("000212", "2")),
+                                            matcherRule: new KeyValuePair<string, string?>[]
+                                            {
+                                                new("000211", "1"),
+                                                new("000212", "2")
+                                            },
                                             skipNullable: true),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
                                             sqlName: "LowerCaseName",
                                             type: RuleFieldType.LowerString,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
                                             sqlName: "CityCount",
                                             type: RuleFieldType.Int32,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
                                             sqlName: "CityCapitalization",
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
+                                        new(
                                             crmField: new("sl_capitalbit"),
                                             sqlName: "IsCapital",
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Type = "LowerString",
                                             Sql = "LowerCaseName",
                                             Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
                                             LookupName = "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Decimal",
                                             Sql = "CityCapitalization",
                                             Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join",
-                                }),
-                        })
+                                }
+                            ],
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
-                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new(
+                                        "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                        "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new(
+                                        "sl_capitalization@OData.Community.Display.V1.FormattedValue")
+                                },
                                 filter: null,
-                                includeAnnotations: "Microsoft.Dynamics.CRM.lookuplogicalname,Microsoft.Dynamics.CRM.associatednavigationproperty,OData.Community.Display.V1.FormattedValue"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "Microsoft.Dynamics.CRM.lookuplogicalname,Microsoft.Dynamics.CRM.associatednavigationproperty," +
+                                                    "OData.Community.Display.V1.FormattedValue"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
-                                            crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    fields: new RuleField[]
+                                    {
+                                        new(
+                                            crmField: new(
+                                                "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                                "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                             sqlName: "LowerCaseName",
                                             type: RuleFieldType.LowerString,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
-                                            crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                        new(
+                                            crmField: new(
+                                                "sl_capitalization@OData.Community.Display.V1.FormattedValue"),
                                             sqlName: "CityCapitalization",
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
-            new object[]
-            {
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
+            [
                 new RuleSetGetOption("./configuration.yaml", new("*")),
                 new ConfigurationYaml
                 {
-                    Entities = new FlatArray<EntityYaml>(
-                        new EntityYaml
+                    Entities =
+                    [
+                        new()
                         {
                             Name = "sl_area",
                             Plural = "sl_areas",
                             Annotations = "PrimmaryAnnotationSholdBeChosen",
-                            Tables = new FlatArray<TableYaml>(
-                                new TableYaml
+                            Tables =
+                            [
+                                new()
                                 {
                                     Name = "Area",
-                                    Fields = new FlatArray<FieldYaml>(
-                                        new FieldYaml
+                                    Fields =
+                                    [
+                                        new()
                                         {
                                             Type = "LowerString",
                                             Sql = "LowerCaseName",
                                             Crm = "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
                                             LookupName = "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"
                                         },
-                                        new FieldYaml
+                                        new()
                                         {
                                             Type = "Decimal",
                                             Sql = "CityCapitalization",
                                             Crm = "sl_capitalization@OData.Community.Display.V1.FormattedValue",
-                                        }),
+                                        }
+                                    ],
                                     Operation = "Join",
-                                }),
-                        })
+                                }
+                            ],
+                        }
+                    ]
                 },
                 new RuleSetGetIn(null, false),
-                new RuleSetGetOut(new(
-                        new RuleEntity(
+                new RuleSetGetOut(
+                    entities: new RuleEntity[]
+                    {
+                        new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new(
-                                    new RuleCrmField("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
-                                    new RuleCrmField("sl_capitalization@OData.Community.Display.V1.FormattedValue")),
+                                fields: new RuleCrmField[]
+                                {
+                                    new(
+                                        "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                        "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    new(
+                                        "sl_capitalization@OData.Community.Display.V1.FormattedValue")
+                                },
                                 filter: null,
-                                includeAnnotations: "PrimmaryAnnotationSholdBeChosen"
-                            ),
-                            tables: new(
-                                new RuleTable(
+                                includeAnnotations: "PrimmaryAnnotationSholdBeChosen"),
+                            tables: new RuleTable[]
+                            {
+                                new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new(
-                                        new RuleField(
-                                            crmField: new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname", "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
+                                    fields: new RuleField[]
+                                    {
+                                        new(
+                                            crmField: new(
+                                                "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
+                                                "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                             sqlName: "LowerCaseName",
                                             type: RuleFieldType.LowerString,
                                             matcherRule: default,
                                             skipNullable: false),
-                                        new RuleField(
-                                            crmField: new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
+                                        new(
+                                            crmField: new(
+                                                "sl_capitalization@OData.Community.Display.V1.FormattedValue"),
                                             sqlName: "CityCapitalization",
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
-                                            skipNullable: false))))))),
-            },
+                                            skipNullable: false)
+                                    })
+                            })
+                    }),
+            ],
         };
 }

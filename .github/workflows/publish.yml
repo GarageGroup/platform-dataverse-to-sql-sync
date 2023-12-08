@@ -17,7 +17,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Add Garage Group NuGet Source
         run: >
@@ -76,12 +76,12 @@ jobs:
       - name: Archive sync func publish folder
         run: |
           cd ./buildFunc
-          zip -r garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip ./
+          zip -r garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip ./
 
       - name: Archive console app publish folder
         run: |
           cd ./buildConsole
-          zip -r garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip ./
+          zip -r garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip ./
 
       - name: Azure Login
         uses: azure/login@v1
@@ -95,13 +95,13 @@ jobs:
           inlineScript: |
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-${{ env.version }}.zip \
+              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} &&
 
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-${{ env.version }}.zip \
+              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
@@ -124,7 +124,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Add Garage Group NuGet Source
         run: >
@@ -155,12 +155,12 @@ jobs:
       - name: Archive sync func publish folder
         run: |
           cd ./buildFunc
-          zip -r garage-platform-dataverse-to-sql-azure-func-latest.zip ./
+          zip -r garage-platform-dataverse-to-sql-azure-func-net8-latest.zip ./
 
       - name: Archive console app publish folder
         run: |
           cd ./buildConsole
-          zip -r garage-platform-dataverse-to-sql-console-app-latest.zip ./
+          zip -r garage-platform-dataverse-to-sql-console-app-net8-latest.zip ./
 
       - name: Azure Login
         uses: azure/login@v1
@@ -173,13 +173,13 @@ jobs:
           inlineScript: |
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-latest.zip \
+              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-net8-latest.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} &&
 
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-latest.zip \
+              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-net8-latest.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
