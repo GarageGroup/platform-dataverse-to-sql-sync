@@ -23,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.14.0" />
+    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.15.1" />
     <PackageReference Include="GarageGroup.Infra.Handler.Console" Version="0.8.0" />
     <PackageReference Include="GarageGroup.Infra.Http.Polly" Version="1.2.0" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="2.3.0" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="2.4.0" />
     <PackageReference Include="GarageGroup.Infra.Sql.Api.Provider.Microsoft" Version="2.2.0" />
     <PackageReference Include="PrimeFuncPack.Primitives.Pipeline" Version="2.0.3" />
   </ItemGroup>
