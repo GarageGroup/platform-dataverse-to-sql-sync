@@ -71,17 +71,29 @@ jobs:
 
       - name: Get version
         id: get_version
-        run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+        run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
+
+      - name: Get current date time
+        id: date
+        run: echo "datetime=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: './buildFunc/appsettings.json'
+        env:
+          Info.ApiVersion: '${{ steps.get_version.outputs.version }}'
+          Info.BuildDateTime: '${{ steps.date.outputs.datetime }}'
 
       - name: Archive sync func publish folder
         run: |
           cd ./buildFunc
-          zip -r garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip ./
+          zip -r garage-platform-dataverse-to-sql-azure-func-net8-${{ steps.get_version.outputs.version }}.zip ./
 
       - name: Archive console app publish folder
         run: |
           cd ./buildConsole
-          zip -r garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip ./
+          zip -r garage-platform-dataverse-to-sql-console-app-net8-${{ steps.get_version.outputs.version }}.zip ./
 
       - name: Azure Login
         uses: azure/login@v1
@@ -95,13 +107,13 @@ jobs:
           inlineScript: |
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip \
+              --file ./buildFunc/garage-platform-dataverse-to-sql-azure-func-net8-${{ steps.get_version.outputs.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} &&
 
             az storage blob upload \
               --container-name artifacts \
-              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip \
+              --file ./buildConsole/garage-platform-dataverse-to-sql-console-app-net8-${{ steps.get_version.outputs.version }}.zip \
               --account-name startifactblob \
               --account-key ${{ secrets.AZURE_ACCOUNT_KEY_ARTIFACT }} \
         env:
@@ -151,6 +163,22 @@ jobs:
 
       - name: Publish console app
         run: dotnet publish ./src/app/data-move/Console/Console.csproj --no-build  -c Release --output ./buildConsole
+
+      - name: Get version
+        id: get_version
+        run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
+
+      - name: Get current date time
+        id: date
+        run: echo "datetime=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: './buildFunc/appsettings.json'
+        env:
+          Info.ApiVersion: '${{ steps.get_version.outputs.version }}'
+          Info.BuildDateTime: '${{ steps.date.outputs.datetime }}'
 
       - name: Archive sync func publish folder
         run: |
