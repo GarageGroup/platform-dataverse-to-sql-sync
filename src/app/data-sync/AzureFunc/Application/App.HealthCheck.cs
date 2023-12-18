@@ -10,6 +10,6 @@ partial class Application
         =>
         HealthCheck.UseServices(
             UseDataverseApi().UseServiceHealthCheckApi("DataverseApi"),
-            UseSqlApi().UseServiceHealthCheckApi("BlobStorage"))
+            UseSqlApi().UseServiceHealthCheckApi("SqlApi"))
         .UseHealthCheckHandler();
 }
