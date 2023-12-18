@@ -15,7 +15,7 @@ jobs:
 
     - name: Get version
       id: get_version
-      run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+      run: echo "version=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     - name: Azure Login
       uses: azure/login@v1
@@ -28,13 +28,13 @@ jobs:
         azcliversion: 2.30.0
         inlineScript: |
           func_blob_exists=$(az storage blob exists \
-            --name garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip \
+            --name garage-platform-dataverse-to-sql-azure-func-net8-${{ steps.get_version.outputs.version }}.zip \
             --container-name artifacts \
             --account-name startifactblob \
             --auth-mode login --output tsv --query exists)
 
           console_blob_exists=$(az storage blob exists \
-            --name garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip \
+            --name garage-platform-dataverse-to-sql-console-app-net8-${{ steps.get_version.outputs.version }}.zip \
             --container-name artifacts \
             --account-name startifactblob \
             --auth-mode login --output tsv --query exists)
@@ -42,7 +42,7 @@ jobs:
           if [ $func_blob_exists = true ]
           then
             az storage blob delete \
-              --name garage-platform-dataverse-to-sql-azure-func-net8-${{ env.version }}.zip \
+              --name garage-platform-dataverse-to-sql-azure-func-net8-${{ steps.get_version.outputs.version }}.zip \
               --container-name artifacts \
               --account-name startifactblob \
               --auth-mode login
@@ -51,7 +51,7 @@ jobs:
           if [ $console_blob_exists = true ]
           then
             az storage blob delete \
-              --name garage-platform-dataverse-to-sql-console-app-net8-${{ env.version }}.zip \
+              --name garage-platform-dataverse-to-sql-console-app-net8-${{ steps.get_version.outputs.version }}.zip \
               --container-name artifacts \
               --account-name startifactblob \
               --auth-mode login
