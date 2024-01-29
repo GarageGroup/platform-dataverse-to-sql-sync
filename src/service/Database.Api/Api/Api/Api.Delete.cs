@@ -14,10 +14,7 @@ partial class DatabaseApi
         .Pipe(
             static @in => new DbDeleteQuery(
                 tableName: @in.TableName,
-                filter: CreateDbFilter(@in))
-            {
-                TimeoutInSeconds = DefaultTimeoutInSeconds
-            })
+                filter: CreateDbFilter(@in)))
         .PipeValue(
             sqlApi.ExecuteNonQueryAsync)
         .Pipe(

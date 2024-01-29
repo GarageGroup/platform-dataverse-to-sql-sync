@@ -67,10 +67,15 @@ partial class DatabaseApiTest
         var input = new DbDataUpdateIn(
             tableName: "table1",
             keyFieldName: "id",
-            items: new(
-                new DbDataItem(
+            items:
+            [
+                new(
                     crmId: Guid.Parse("9c6c896b-506b-4bab-ba4b-546ded8d4b81"),
-                    fieldValues: new(new DataFieldValue("field1", string.Empty)))),
+                    fieldValues:
+                    [
+                        new("field1", string.Empty)
+                    ])
+            ],
             type: DbDataUpdateType.CreateOrUpdate,
             syncTime: false);
 

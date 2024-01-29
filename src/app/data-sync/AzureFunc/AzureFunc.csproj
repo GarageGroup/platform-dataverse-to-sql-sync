@@ -28,15 +28,15 @@
 
   <ItemGroup>
     <PackageReference Include="GarageGroup.Infra.Azure.Handler" Version="0.12.3" />
-    <PackageReference Include="GarageGroup.Infra.Azure.Hosting" Version="0.6.1" />
-    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.15.1" />
+    <PackageReference Include="GarageGroup.Infra.Azure.Hosting" Version="0.7.1" />
+    <PackageReference Include="GarageGroup.Infra.Dataverse.Api" Version="3.16.0" />
     <PackageReference Include="GarageGroup.Infra.HealthCheck.Handler" Version="0.3.0" />
     <PackageReference Include="GarageGroup.Infra.Http.Polly" Version="1.2.0" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="2.4.0" />
-    <PackageReference Include="GarageGroup.Infra.Sql.Api.Provider.Microsoft" Version="2.2.0" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api" Version="2.6.0" />
+    <PackageReference Include="GarageGroup.Infra.Sql.Api.Provider.Microsoft" Version="2.3.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.ServiceBus" Version="5.14.1" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.16.3" OutputItemType="Analyzer" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.ServiceBus" Version="5.15.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.16.4" OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>

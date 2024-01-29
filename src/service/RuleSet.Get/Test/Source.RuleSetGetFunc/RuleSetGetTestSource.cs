@@ -1,5 +1,5 @@
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
-public static partial class RuleSetGetTestSource
+internal static partial class RuleSetGetTestSource
 {
 }

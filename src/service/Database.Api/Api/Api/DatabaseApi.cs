@@ -4,8 +4,6 @@ namespace GarageGroup.Platform.DataverseToSqlSync;
 
 internal sealed partial class DatabaseApi(ISqlExecuteNonQuerySupplier sqlApi, IDateTimeOffsetProvider dateTimeOffsetProvider) : IDatabaseApi
 {
-    private const int DefaultTimeoutInSeconds = 300;
-
     private const string PrimaryKeyFieldName = "CrmId";
 
     private const string SyncTimeFieldName = "SyncTime";
