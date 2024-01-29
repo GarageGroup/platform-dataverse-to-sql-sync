@@ -33,8 +33,10 @@ partial class DatabaseApi
         =>
         new(
             tableName: AuditDateTimeTableName,
-            fieldValues: new(
+            fieldValues:
+            [
                 new(nameof(input.EntityName), input.EntityName),
-                new(nameof(input.AuditDateTime), input.AuditDateTime)),
+                new(nameof(input.AuditDateTime), input.AuditDateTime)
+            ],
             filter: new DbParameterFilter(nameof(input.EntityName), DbFilterOperator.Equal, input.EntityName));
 }

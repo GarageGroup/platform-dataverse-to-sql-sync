@@ -1,23 +1,23 @@
-using System;
 using System.Collections.Generic;
+using Xunit;
 
 namespace GarageGroup.Platform.DataverseToSqlSync.Test;
 
 partial class RuleSetGetTestSource
 {
-    public static IEnumerable<object[]> InputTestData
+    public static TheoryData<RuleSetGetOption, ConfigurationYaml, RuleSetGetIn, RuleSetGetOut> InputTestData
         =>
-        new object[][]
+        new()
         {
-            [
-                new RuleSetGetOption("./configuration.yaml", default),
-                new ConfigurationYaml(),
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(default),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", default),
-                new ConfigurationYaml
+            {
+                new("./configuration.yaml", default),
+                default,
+                new(string.Empty, false),
+                default
+            },
+            {
+                new("./configuration.yaml", default),
+                new()
                 {
                     Entities =
                     [
@@ -47,20 +47,20 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(default),
-            ],
-            [
-                new RuleSetGetOption(
+                new(string.Empty, false),
+                default
+            },
+            {
+                new(
                     "./configuration.yaml",
                     new("sl_pictures", "sl_unit")),
-                new ConfigurationYaml(),
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                new(),
+                new(string.Empty, false),
+                new()
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -112,32 +112,32 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(string.Empty, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_url"),
                                     new("sl_pictureid"),
                                     new("createdon"),
                                     new("modifiedon")
-                                },
+                                ],
                                 filter: "sl_id ne null",
                                 includeAnnotations: "OData.IncludeAnnotations"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Sync,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
@@ -162,40 +162,40 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            }),
+                                    ])
+                            ]),
                         new(
                             crmData: new(
                                 entityName: "sl_unit",
                                 entityPluralName: "sl_units",
                                 entityKeyFieldName: "sl_unitid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Property",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -223,43 +223,42 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(string.Empty, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_unit",
                                 entityPluralName: "sl_units",
                                 entityKeyFieldName: "sl_unitid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name")
-                                },
+                                ],
                                 filter: null,
-                                includeAnnotations: null
-                            ),
-                            tables: new RuleTable[]
-                            {
+                                includeAnnotations: null),
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Property",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -303,32 +302,32 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(string.Empty, true),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(string.Empty, true),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_url"),
                                     new("sl_pictureid"),
                                     new("createdon"),
                                     new("modifiedon")
-                                },
+                                ],
                                 filter: "sl_id ne null",
                                 includeAnnotations: "OData.IncludeAnnotations"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Sync,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
@@ -353,13 +352,13 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -409,69 +408,69 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(string.Empty, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(string.Empty, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_url")
-                                },
+                                ],
                                 filter: "sl_id ne null",
                                 includeAnnotations: "OData.IncludeAnnotations"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            }),
+                                    ])
+                            ]),
                         new(
                             crmData: new(
                                 entityName: "sl_listing",
                                 entityPluralName: "sl_listings",
                                 entityKeyFieldName: "sl_listingid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_price")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Listing",
                                     keyFieldName: "AnotherCrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_price"),
                                             sqlName: "Price",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -519,42 +518,42 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn("sl_area", false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new("sl_area", false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("sl_area", "sl_picture")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("sl_area", "sl_picture")),
+                new()
                 {
                     Entities =
                     [
@@ -622,69 +621,69 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_picture",
                                 entityPluralName: "sl_pictures",
                                 entityKeyFieldName: "sl_pictureid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_url")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Picture",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_url"),
                                             sqlName: "Url",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            }),
+                                    ])
+                            ]),
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name"),
                                             sqlName: "Name",
                                             type: RuleFieldType.Default,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -743,33 +742,33 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name", "sl_country"),
                                     new("sl_lowername"),
                                     new("sl_citycount"),
                                     new("sl_capitalization"),
                                     new("sl_capitalbit")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: null),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name", "sl_country"),
                                             sqlName: "Name",
@@ -802,13 +801,13 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -867,33 +866,33 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name", "sl_country@ForamtedValue"),
                                     new("sl_lowername@Entry.*"),
                                     new("sl_citycount"),
                                     new("sl_capitalization@ForamtedValue"),
                                     new("sl_capitalbit@Entry.*")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: "ForamtedValue,Entry.*"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name", "sl_country@ForamtedValue"),
                                             sqlName: "Name",
@@ -928,13 +927,13 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -993,34 +992,34 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                     new("sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname"),
                                     new("sl_citycount@Microsoft.Dynamics.CRM.lookuplogicalname"),
                                     new("sl_capitalization@OData.Community.Display.V1.FormattedValue"),
                                     new("sl_capitalbit")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: "Microsoft.Dynamics.CRM.associatednavigationproperty,Microsoft.Dynamics.CRM.lookuplogicalname," +
                                                     "OData.Community.Display.V1.FormattedValue"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new("sl_name", "sl_country@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                             sqlName: "Name",
@@ -1055,13 +1054,13 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Boolean,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -1096,34 +1095,34 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new(
                                         "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
                                         "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                     new(
                                         "sl_capitalization@OData.Community.Display.V1.FormattedValue")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: "Microsoft.Dynamics.CRM.lookuplogicalname,Microsoft.Dynamics.CRM.associatednavigationproperty," +
                                                     "OData.Community.Display.V1.FormattedValue"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new(
                                                 "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
@@ -1139,13 +1138,13 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
-            [
-                new RuleSetGetOption("./configuration.yaml", new("*")),
-                new ConfigurationYaml
+                                    ])
+                            ])
+                    ])
+            },
+            {
+                new("./configuration.yaml", new("*")),
+                new()
                 {
                     Entities =
                     [
@@ -1181,33 +1180,33 @@ partial class RuleSetGetTestSource
                         }
                     ]
                 },
-                new RuleSetGetIn(null, false),
-                new RuleSetGetOut(
-                    entities: new RuleEntity[]
-                    {
+                new(null, false),
+                new(
+                    entities:
+                    [
                         new(
                             crmData: new(
                                 entityName: "sl_area",
                                 entityPluralName: "sl_areas",
                                 entityKeyFieldName: "sl_areaid",
-                                fields: new RuleCrmField[]
-                                {
+                                fields:
+                                [
                                     new(
                                         "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
                                         "sl_lowernamelookup@Microsoft.Dynamics.CRM.associatednavigationproperty"),
                                     new(
                                         "sl_capitalization@OData.Community.Display.V1.FormattedValue")
-                                },
+                                ],
                                 filter: null,
                                 includeAnnotations: "PrimmaryAnnotationSholdBeChosen"),
-                            tables: new RuleTable[]
-                            {
+                            tables:
+                            [
                                 new(
                                     operation: RuleItemOperation.Join,
                                     tableName: "Area",
                                     keyFieldName: "CrmId",
-                                    fields: new RuleField[]
-                                    {
+                                    fields:
+                                    [
                                         new(
                                             crmField: new(
                                                 "sl_lowername@Microsoft.Dynamics.CRM.lookuplogicalname",
@@ -1223,9 +1222,9 @@ partial class RuleSetGetTestSource
                                             type: RuleFieldType.Decimal,
                                             matcherRule: default,
                                             skipNullable: false)
-                                    })
-                            })
-                    }),
-            ],
+                                    ])
+                            ])
+                    ])
+            }
         };
 }

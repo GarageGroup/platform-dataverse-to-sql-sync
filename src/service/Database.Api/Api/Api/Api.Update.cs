@@ -25,10 +25,7 @@ partial class DatabaseApi
 
     private DbCombinedQuery CreateDbQuery(DbDataUpdateIn input)
     {
-        return new(input.Items.Map(CreateDbQuery))
-        {
-            TimeoutInSeconds = DefaultTimeoutInSeconds
-        };
+        return new(input.Items.Map(CreateDbQuery));
 
         IDbQuery CreateDbQuery(DbDataItem item, int index)
             =>

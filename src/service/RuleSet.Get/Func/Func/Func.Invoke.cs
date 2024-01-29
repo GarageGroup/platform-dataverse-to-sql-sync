@@ -178,8 +178,7 @@ partial class RuleSetGetFunc
 
     private static RuleField[] CreateAdditionFields(string crmEntityKeyFieldName, string sqlKeyFieldName)
         =>
-        new RuleField[]
-        {
+        [
             new(
                 crmField: new(crmEntityKeyFieldName),
                 sqlName: sqlKeyFieldName,
@@ -198,5 +197,5 @@ partial class RuleSetGetFunc
                 type: default,
                 matcherRule: default,
                 skipNullable: false)
-        };
+        ];
 }

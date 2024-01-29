@@ -67,8 +67,8 @@ partial class CrmEntityFlowGetFuncTest
     [MemberData(nameof(CrmEntityFlowGetFuncSource.DataverseInputTestData), MemberType = typeof(CrmEntityFlowGetFuncSource))]
     internal static async Task InvokeAsync_CancellationTokenIsNotCanceled_ExpectDataverseEntitySetGetFunctionCall(
         CrmEntityFlowGetIn input,
-        FlatArray<DataverseEntitySetGetOut<CrmEntityJson>> dataverseEntitySetGetOutSet,
-        FlatArray<DataverseEntitySetGetIn> dataverseEntitySetGetInSet)
+        DataverseEntitySetGetOut<CrmEntityJson>[] dataverseEntitySetGetOutSet,
+        DataverseEntitySetGetIn[] dataverseEntitySetGetInSet)
     {
         var mockDataverseApi = CreateMockDataverseApi(dataverseEntitySetGetOutSet);
         var func = new CrmEntityFlowGetFunc(mockDataverseApi.Object);
