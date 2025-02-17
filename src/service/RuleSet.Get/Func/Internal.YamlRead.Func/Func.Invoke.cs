@@ -17,6 +17,6 @@ partial class YamlReadFunc
             return default;
         }
 
-        return YamlDeserializer.Deserialize<ConfigurationYaml>(yaml);
+        return BuildYamlDeserializer().Deserialize<ConfigurationYaml>(yaml);
     }
 }
